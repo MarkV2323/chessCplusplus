@@ -30,13 +30,10 @@ This project (Chess) is important to us because this allows us to use different 
 
 ### What languages/tools/technologies do you plan to use? (This list may change over the course of the project)
 * C++
-* \<[NCurses](https://tldp.org/HOWTO/NCURSES-Programming-HOWTO/)\> - Will be used for visual display of chess game.
+* [NCurses](https://tldp.org/HOWTO/NCURSES-Programming-HOWTO/) - Will be used for visual display of chess game.
 
 ### What will be the input/output of your project?
 The input of the project will be what piece the user would want to move and different commands like move or view that shows specific moves for that chess piece. The output would be the chess board with all the pieces and the specified output when you moved a piece or you want to view specific locations that a piece can move.
-* What are the three design patterns you will be using. For each design pattern you must:
-  * Explain in 3 - 5 sentences why you picked this pattern and what feature you will implement with it
-* This description should be in enough detail that the TA/instructor can determine the complexity of the project and if it is sufficient for the team members to complete in the time allotted.
 
 ### Planned designed patterns to be used in the project
 
