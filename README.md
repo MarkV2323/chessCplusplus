@@ -2,9 +2,8 @@
  > Prompt text is any lines beginning with "\<"
  > Replace anything between \<...\> with your project specifics and remove angle brackets. For example, you need to name your project and replace the header right below this line with that title (no angle brackets). 
 # Chess
- > Your author list below should include links to all members GitHub and should begin with a "\<" (remove existing author).
  
- > Authors: \<[Christopher Luu](https://github.com/christopherluu-dev)\>
+ > Authors: \<[Christopher Luu](https://github.com/christopherluu-dev)\> \<[Mark Vincent](https://github.com/MarkV2323)\>
  
  > You will be forming a group of **THREE** students and work on an interesting project that you will propose yourself (in this `README.md` document). You can pick any project that you'd like, but it needs ot implement three design patterns. Each of the members in a group is expected to work on at least one design pattern and its test cases. You can, of course, help each other, but it needs to be clear who will be responsible for which pattern and for which general project features.
  
@@ -27,6 +26,10 @@
  > * What are the three design patterns you will be using. For each design pattern you must:
  >   * Explain in 3 - 5 sentences why you picked this pattern and what feature you will implement with it
  > * This description should be in enough detail that the TA/instructor can determine the complexity of the project and if it is sufficient for the team members to complete in the time allotted. 
+> ### * Planned designed patterns to be used in the project
+> * Our first design pattern we plan to use will be the Abstract Factory pattern. We have decided to go with this pattern because it provides an interface for creating all of the different chess peices (think king, queen, knight, etc) without needing to specify concrete classes. This way, we should be able to create chess peice objects from just the factory, rather than each specific concrete class. The most important time to create peices is at the beggining of a new chess game, and with this pattern, that process should be simplified. 
+> * Our second design pattern we plan to use will be 
+> * Our third design pattern we plan to use will be 
 
  > ## Phase II
  > In addition to completing the "Class Diagram" section below, you will need to 
