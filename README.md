@@ -37,9 +37,9 @@ The input of the project will be what piece the user would want to move and diff
 
 ### Planned designed patterns to be used in the project
 
-* Our first design pattern we plan to use will be the Abstract Factory pattern. We have decided to go with this pattern because it provides an interface for creating all of the different chess pieces (think king, queen, knight, etc) without needing to specify concrete classes. This way, we should be able to create chess piece objects from just the factory, rather than each specific concrete class. The most important time to create pieces is at the beggining of a new chess game, and with this pattern, that process should be simplified.
+* Our first design pattern we plan to use will be the Command pattern. We picked this pattern because we want to be able to log moves in a ordered list called history. The benefits of having a history of moves is that it will simplify the saving and loading process of games. 
 
-* Our second design pattern we plan to use will be the Strategy pattern. We decided to go with the Strategy pattern because it gives us a lot of flexibility in implementing move algorithims for pieces. This should also keep our chess piece objects relatively simple, and also provide us with an ability to log different algorithims used.
+* Our second design pattern we plan to use will be the Strategy pattern. We decided to go with the Strategy pattern because it gives us a lot of flexibility in implementing our saving and loading algorithims, specifically for different file formats. We plan to have strategies involving CSV and JSON based files. 
 
 * Our third design pattern we plan to use will be the Singleton pattern. There are a few objects that only need to have one instance, and for which having a single global access point will produce cleaner code rather than passing them around as parameters. For example, the chessboard will need to be used by numerous components: drawing, game logic, and the AI. A move timer would also be accessed by both drawing code and game logic. Both of these objects only need to have a single instance, since you only need one timer and one board per chess game.
 
@@ -53,9 +53,13 @@ The input of the project will be what piece the user would want to move and diff
  > * Complete your first *sprint planning* meeting to plan out the next 7 days of work.
  >   * Create smaller development tasks as issues and assign them to team members. Place these in the `Backlog` column.
  >   * These cards should represent roughly 7 days worth of development time for your team, taking you until your first meeting with the TA
-## Class Diagram
- > Include a class diagram(s) for each design pattern and a description of the diagram(s). This should be in sufficient detail that another group could pick up the project this point and successfully complete it. Use proper OMT notation (as discussed in the course slides). You may combine multiple design patterns into one diagram if you'd like, but it needs to be clear which portion of the diagram represents which design pattern (either in the diagram or in the description). 
- 
+## Class Diagram 
+ ![SampleText](https://user-images.githubusercontent.com/41304553/99178322-cecf3c00-26c6-11eb-90b4-4e5f233b0e2a.png)
+ Patterns Used:   
+ Strategy  - SaveStrategy   
+ Command   - Command   
+ Singleton - Chessboard   
+
  > ## Phase III
  > You will need to schedule a check-in with the TA (during lab hours or office hours). Your entire team must be present. 
  > * Before the meeting you should perform a sprint plan like you did in Phase II
