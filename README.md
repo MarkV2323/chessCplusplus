@@ -56,9 +56,12 @@ The input of the project will be what piece the user would want to move and diff
 ## Class Diagram 
  ![SampleText](https://user-images.githubusercontent.com/41304553/99178322-cecf3c00-26c6-11eb-90b4-4e5f233b0e2a.png)
  Patterns Used:   
- Strategy  - SaveStrategy   
- Command   - Command   
- Singleton - Chessboard   
+ Strategy  - SaveStrategy - Will allow us to easily switch between different saving strategys, we plan to have one for both CSV and JSON formats.   
+ Command   - Command - A way to standardize the moving of pieces, which will make saving and loading games easier as a result.   
+ Singleton - Chessboard - The chessboard will hold pretty much all of the data associated with the chess game, and as such will need to be accessed from other objects, hence  making it based off of the Singleton pattern.   
+ 
+ General Description:   
+ The chessboard will have most of the data of the program, containing the players invovled, a 2D array of Chess Pieces, a history of commands (moves) executed, and some varibles to provide highlighting of selected pieces, and possible spots to move to. We also want to have turn timers for the players, and a object to store coordinates.   
 
  > ## Phase III
  > You will need to schedule a check-in with the TA (during lab hours or office hours). Your entire team must be present. 
