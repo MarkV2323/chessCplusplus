@@ -1,3 +1,6 @@
+#ifndef __COORD_HPP__
+#define __COORD_HPP__
+
 class Coord {
 public:
     int x, y;
@@ -12,3 +15,5 @@ public:
     Coord operator+(const Coord& rhs) const;
     bool operator==(const Coord& rhs) const;
 };
+
+#endif //__COORD_HPP__
