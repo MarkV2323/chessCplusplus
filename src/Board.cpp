@@ -7,6 +7,11 @@
 
 // Graphics
 
+static bool isBlackSquare(const Coord &c) {
+    return ((c.y + c.x) % 2) == 0;
+}
+
+#ifndef NO_GRAPHICS
 #define NUM_SQUARES 8
 #define SQUAREW 5
 #define SQUAREH 3
@@ -20,20 +25,20 @@ static WINDOW* getSquare(int i, int j) {
 static WINDOW* getSquare(const Coord &c) {
     return getSquare(c.y, c.x);
 }
+#endif
 
 static void drawAllSquares() {
+#ifndef NO_GRAPHICS
     for (auto square: wsquares) {
         wnoutrefresh(square);
         wrefresh(square);
     }
     doupdate();
-}
-
-static bool isBlackSquare(const Coord &c) {
-    return ((c.y + c.x) % 2) == 0;
+#endif
 }
 
 static void drawBorder(const Coord &c, bool isCursor) {
+#ifndef NO_GRAPHICS
     if (isCursor) {
         WINDOW* w = getSquare(c);
         assert(w);
@@ -50,27 +55,17 @@ static void drawBorder(const Coord &c, bool isCursor) {
             wbkgd(w, COLOR_PAIR(4));
         box(w, '|', '-');
     }
+#endif
 }
 
 static void eraseBorder(const Coord &c) {
+#ifndef NO_GRAPHICS
     wborder(getSquare(c), ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ');
-}
-
-void Board::eraseCursor() {
-    eraseBorder(cursor_);
-    if (std::find(highlightedSquares_.begin(),
-                  highlightedSquares_.end(),
-                  cursor_)
-        != highlightedSquares_.end())
-        // The square with the cursor is highlighted. Make sure to restore its highlighting.
-        drawBorder(cursor_, false);
-}
-
-void Board::drawCursor() {
-    drawBorder(cursor_, true);
+#endif
 }
 
 void Board::initNCurses() {
+#ifndef NO_GRAPHICS
     initscr();
     //cbreak(); // disable line buffering
     noecho();
@@ -93,19 +88,38 @@ void Board::initNCurses() {
     }
     drawCursor();
     drawAllSquares();
+#endif
 }
 
 void Board::cleanupNCurses() {
+#ifndef NO_GRAPHICS
     for (auto square: wsquares)
         delwin(square);
     endwin();
+#endif
 }
 
 void Board::drawTick() {
+#ifndef NO_GRAPHICS
     //refresh();
     drawAllSquares();
 
     assert(getch()==ERR);
+#endif
+}
+
+void Board::eraseCursor() {
+    eraseBorder(cursor_);
+    if (std::find(highlightedSquares_.begin(),
+                  highlightedSquares_.end(),
+                  cursor_)
+        != highlightedSquares_.end())
+        // The square with the cursor is highlighted. Make sure to restore its highlighting.
+        drawBorder(cursor_, false);
+}
+
+void Board::drawCursor() {
+    drawBorder(cursor_, true);
 }
 
 // Board
@@ -113,8 +127,8 @@ void Board::drawTick() {
 void Board::moveCursor(enum Direction dir) {
     eraseCursor();
     switch(dir) {
-    case UP: cursor_.addWrapped(Coord(0,1)); break;
-    case DOWN: cursor_.addWrapped(Coord(0,-1)); break;
+    case UP: cursor_.addWrapped(Coord(0,-1)); break;
+    case DOWN: cursor_.addWrapped(Coord(0,1)); break;
     case LEFT: cursor_.addWrapped(Coord(-1,0)); break;
     case RIGHT: cursor_.addWrapped(Coord(1,0)); break;
     }
