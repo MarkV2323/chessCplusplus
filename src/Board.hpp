@@ -12,6 +12,7 @@ enum Direction {UP, DOWN, LEFT, RIGHT};
 class Board {
 private:
     // These are private so that Board can properly update graphics when they change
+    Piece *board[8][8] = {nullptr};
     Coord cursor_ = Coord(0,0);
     std::vector<Coord> highlightedSquares_;
 
@@ -19,8 +20,6 @@ private:
     void eraseCursor();
 
 public:
-    Piece *board[8][8] = {nullptr};
-
     // Returns the singleton instance
     static Board& get();
 
@@ -34,6 +33,9 @@ public:
 
     void highlightedSquares(std::vector<Coord>);
     const std::vector<Coord>& highlightedSquares();
+
+    void placePiece(Piece* p, Coord loc);
+    Piece* piece(Coord loc);
 
     void drawTick();
 };

@@ -35,3 +35,24 @@ TEST(BoardTest, HighlightedSquares) {
     v[0] = Coord(7,7);
     EXPECT_EQ(b.highlightedSquares()[0], a);
 }
+
+TEST(BoardTest, Pieces) {
+    Board &b = Board::get();
+    Coord a (0,1);
+    Piece p;
+    std::vector<Coord> v;
+    for (int i = 0; i < 8; ++i)
+        for (int j = 0; j < 8; ++j)
+            v.push_back(Coord(i,j));
+
+    // board should start empty
+    for (auto c: v)
+        EXPECT_EQ(b.piece(c), nullptr);
+    Coord c = v.back();
+    v.pop_back();
+    // place a piece
+    b.placePiece(&p, c);
+    EXPECT_EQ(b.piece(c), &p);
+    for (auto c: v)
+        EXPECT_EQ(b.piece(c), nullptr);
+}

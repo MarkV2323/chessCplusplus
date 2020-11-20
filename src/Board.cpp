@@ -27,7 +27,7 @@ static WINDOW* getSquare(const Coord &c) {
 }
 #endif
 
-static void drawAllSquares() {
+static void refreshAllSquares() {
 #ifndef NO_GRAPHICS
     for (auto square: wsquares) {
         wnoutrefresh(square);
@@ -41,7 +41,6 @@ static void drawBorder(const Coord &c, bool isCursor) {
 #ifndef NO_GRAPHICS
     if (isCursor) {
         WINDOW* w = getSquare(c);
-        assert(w);
         if (isBlackSquare(c))
             wbkgd(w, COLOR_PAIR(1));
         else
@@ -61,6 +60,19 @@ static void drawBorder(const Coord &c, bool isCursor) {
 static void eraseBorder(const Coord &c) {
 #ifndef NO_GRAPHICS
     wborder(getSquare(c), ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ');
+#endif
+}
+
+static void drawSquarePiece(Piece *p, Coord loc) {
+#ifndef NO_GRAPHICS
+    WINDOW* w = getSquare(loc);
+    // erase current printed symbol
+    wmove(w, SQUAREH/2, 1);
+    for (int i = 0; i < SQUAREW-2; ++i)
+        waddch(w, ' ');
+    // insert new symbol
+    if (p)
+        mvwaddnstr(w, SQUAREH/2, (SQUAREW-p->symbol.size())/2, p->symbol.c_str(), p->symbol.size());
 #endif
 }
 
@@ -87,7 +99,7 @@ void Board::initNCurses() {
         wbkgd(wsquares[i], COLOR_PAIR((i+i/NUM_SQUARES)%2 + 1));
     }
     drawCursor();
-    drawAllSquares();
+    refreshAllSquares();
 #endif
 }
 
@@ -101,8 +113,7 @@ void Board::cleanupNCurses() {
 
 void Board::drawTick() {
 #ifndef NO_GRAPHICS
-    //refresh();
-    drawAllSquares();
+    refreshAllSquares();
 
     assert(getch()==ERR);
 #endif
@@ -116,6 +127,7 @@ void Board::eraseCursor() {
         != highlightedSquares_.end())
         // The square with the cursor is highlighted. Make sure to restore its highlighting.
         drawBorder(cursor_, false);
+        ;
 }
 
 void Board::drawCursor() {
@@ -156,4 +168,13 @@ const std::vector<Coord>& Board::highlightedSquares() {
 Board& Board::get() {
     static Board board;
     return board;
+}
+
+void Board::placePiece(Piece *p, Coord loc) {
+    board[loc.y][loc.x] = p;
+    drawSquarePiece(p, loc);
+}
+
+Piece* Board::piece(Coord loc) {
+    return board[loc.y][loc.x];
 }
