@@ -18,5 +18,13 @@ ADD_EXECUTABLE(test
     src/Board.cpp
 )
 
+ADD_EXECUTABLE(visual_test
+    src/Board_visual_test.cpp
+    src/Coord.cpp
+    src/Board.cpp
+)
+
+TARGET_LINK_LIBRARIES(visual_test ncurses)
+
 TARGET_LINK_LIBRARIES(test gtest)
 TARGET_COMPILE_DEFINITIONS(test PRIVATE gtest_disable_pthreads=ON NO_GRAPHICS)

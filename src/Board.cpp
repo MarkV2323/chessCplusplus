@@ -37,6 +37,32 @@ static void refreshAllSquares() {
 #endif
 }
 
+static void drawSquarePiece(Piece *p, Coord loc) {
+#ifndef NO_GRAPHICS
+    WINDOW* w = getSquare(loc);
+    // erase current printed symbol
+    wmove(w, SQUAREH/2, 1);
+    for (int i = 0; i < SQUAREW-2; ++i)
+        waddch(w, ' ');
+    // insert new symbol
+    if (p) {
+        if (p->team == WHITE) {
+            if (isBlackSquare(loc)) wattron(w, COLOR_PAIR(1));
+            else wattron(w, COLOR_PAIR(2));
+        }
+        else {
+            if (isBlackSquare(loc)) wattron(w, COLOR_PAIR(3));
+            else wattron(w, COLOR_PAIR(4));
+        }
+        mvwaddnstr(w,
+                   SQUAREH/2,
+                   (SQUAREW-p->symbol.size())/2,
+                   p->symbol.c_str(),
+                   p->symbol.size());
+    }
+#endif
+}
+
 static void drawBorder(const Coord &c, bool isCursor) {
 #ifndef NO_GRAPHICS
     if (isCursor) {
@@ -63,19 +89,6 @@ static void eraseBorder(const Coord &c) {
 #endif
 }
 
-static void drawSquarePiece(Piece *p, Coord loc) {
-#ifndef NO_GRAPHICS
-    WINDOW* w = getSquare(loc);
-    // erase current printed symbol
-    wmove(w, SQUAREH/2, 1);
-    for (int i = 0; i < SQUAREW-2; ++i)
-        waddch(w, ' ');
-    // insert new symbol
-    if (p)
-        mvwaddnstr(w, SQUAREH/2, (SQUAREW-p->symbol.size())/2, p->symbol.c_str(), p->symbol.size());
-#endif
-}
-
 void Board::initNCurses() {
 #ifndef NO_GRAPHICS
     initscr();
@@ -87,10 +100,10 @@ void Board::initNCurses() {
     start_color();
 
     assert(has_colors() == TRUE);
-    assert(init_pair(1, COLOR_RED, COLOR_BLACK) != ERR); // red on white square
-    assert(init_pair(2, COLOR_RED, COLOR_WHITE) != ERR); // red on black square
-    assert(init_pair(3, COLOR_GREEN, COLOR_BLACK) != ERR); // green on white square
-    assert(init_pair(4, COLOR_GREEN, COLOR_WHITE) != ERR); // green on black square
+    assert(init_pair(1, COLOR_RED, COLOR_BLACK) != ERR); // white on black square
+    assert(init_pair(2, COLOR_RED, COLOR_WHITE) != ERR); // white on white square
+    assert(init_pair(3, COLOR_GREEN, COLOR_BLACK) != ERR); // black on black square
+    assert(init_pair(4, COLOR_GREEN, COLOR_WHITE) != ERR); // black on white square
 
     refresh();
     for (int i = 0; i < sizeof(wsquares)/sizeof(wsquares[0]); ++i) {
@@ -114,8 +127,6 @@ void Board::cleanupNCurses() {
 void Board::drawTick() {
 #ifndef NO_GRAPHICS
     refreshAllSquares();
-
-    assert(getch()==ERR);
 #endif
 }
 
