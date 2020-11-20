@@ -1,7 +1,6 @@
 #ifndef __BOARD_H__
 #define __BOARD_H__
 
-#include "Command.hpp"
 #include "Coord.hpp"
 #include "Piece.hpp"
 
