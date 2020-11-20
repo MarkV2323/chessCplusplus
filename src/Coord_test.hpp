@@ -36,8 +36,8 @@ TEST(CoordTest, Add) {
 
 TEST(CoordTest, AddWrapped) {
     Coord c (1, 2);
-    Coord d (-1, 8);
-    Coord expected (0, 2);
+    Coord d (-2, 8);
+    Coord expected (7, 2);
     c.addWrapped(d);
     EXPECT_EQ(c, expected);
 }

@@ -1,5 +1,7 @@
 #include "Coord.hpp"
 
+#include <cstdlib>
+
 Coord::Coord(int x, int y): x(x), y(y) {};
 
 void Coord::add(const Coord &c) {
@@ -12,6 +14,8 @@ void Coord::addWrapped(const Coord &c) {
     y += c.y;
     x = x % 8;
     y = y % 8;
+    if (x < 0) x = 8+x;
+    if (y < 0) y = 8+y;
 }
 
 Coord& Coord::operator+=(const Coord& rhs) {
