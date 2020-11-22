@@ -8,6 +8,7 @@ ADD_EXECUTABLE(chess
     src/main.cpp
     src/Coord.cpp
     src/Board.cpp
+    src/Piece.cpp
 )
 
 TARGET_LINK_LIBRARIES(chess ncurses)
@@ -16,12 +17,14 @@ ADD_EXECUTABLE(test
     src/test.cpp
     src/Coord.cpp
     src/Board.cpp
+    src/Piece.cpp
 )
 
 ADD_EXECUTABLE(visual_test
     src/Board_visual_test.cpp
     src/Coord.cpp
     src/Board.cpp
+    src/Piece.cpp
 )
 
 TARGET_LINK_LIBRARIES(visual_test ncurses)

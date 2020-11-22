@@ -1,5 +1,6 @@
 // Crude visual test of Board.cpp's drawing
 
+#include "Piece.hpp"
 #include "Board.hpp"
 #include <curses.h>
 
@@ -12,14 +13,10 @@ int main() {
     Board &b = Board::get();
     b.initNCurses();
     Coord c (1,0);
-    Piece p;
-    p.symbol = "Pa";
-    p.team = WHITE;
+    Piece p ("Pa", 0, WHITE, nullptr);
     b.placePiece(&p, c);
     Coord c2 (1,1);
-    Piece p2;
-    p2.symbol = "Kni";
-    p2.team = BLACK;
+    Piece p2 ("Kni", 0, BLACK, nullptr);
     b.placePiece(&p2, c2);
     std::vector<Coord> hs = {Coord(2,0), Coord(2,1)};
     b.highlightedSquares(hs);

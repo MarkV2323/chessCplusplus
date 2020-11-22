@@ -1,5 +1,8 @@
 #include "Board.hpp"
 
+#include "Piece.hpp"
+#include "Coord.hpp"
+
 #include <algorithm>
 #include <array>
 #include <curses.h>
@@ -46,7 +49,7 @@ static void drawSquarePiece(Piece *p, Coord loc) {
         waddch(w, ' ');
     // insert new symbol
     if (p) {
-        if (p->team == WHITE) {
+        if (p->getTeam() == WHITE) {
             if (isBlackSquare(loc)) wattron(w, COLOR_PAIR(1));
             else wattron(w, COLOR_PAIR(2));
         }
@@ -56,9 +59,9 @@ static void drawSquarePiece(Piece *p, Coord loc) {
         }
         mvwaddnstr(w,
                    SQUAREH/2,
-                   (SQUAREW-p->symbol.size())/2,
-                   p->symbol.c_str(),
-                   p->symbol.size());
+                   (SQUAREW-p->getSymbol().size())/2,
+                   p->getSymbol().c_str(),
+                   p->getSymbol().size());
     }
 #endif
 }
