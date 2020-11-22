@@ -1,0 +1,6 @@
+#ifndef FINALPROJECT_COORD_HPP
+#define FINALPROJECT_COORD_HPP
+class Coord {
+
+};
+#endif //FINALPROJECT_COORD_HPP
