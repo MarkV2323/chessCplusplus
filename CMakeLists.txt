@@ -10,10 +10,12 @@ ADD_EXECUTABLE(pieceMain
         src/Coord.cpp
         )
 
-#ADD_EXECUTABLE(pieceTest
-#        src/main.cpp
-#        src/Piece.cpp
-#        )
-#
-#TARGET_LINK_LIBRARIES(pieceTest gtest)
-#TARGET_COMPILE_DEFINITIONS(pieceTest PRIVATE gtest_disable_pthreads=ON)
+ADD_EXECUTABLE(tests
+        tests/tests.cpp
+        src/Piece.cpp
+        src/Pawn.cpp
+        src/Coord.cpp
+        )
+
+TARGET_LINK_LIBRARIES(tests gtest)
+TARGET_COMPILE_DEFINITIONS(tests PRIVATE gtest_disable_pthreads=ON)

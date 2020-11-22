@@ -1,11 +1,18 @@
 #include "../header/Piece.hpp"
+#include <stdexcept>
 
 // Constructor
 Piece::Piece(std::string aSymbol, int aValue, enum enumTeam aTeam, Coord *aCoord) {
     this->symbol = std::move(aSymbol);
     this->value = aValue;
     this->team = aTeam;
-    this->currentLocation = aCoord;
+    // Checks if passed coordinates are out of bounds.
+    if (aCoord->x < 0 || aCoord->x > 8 || aCoord->y < 0 || aCoord->y > 8) {
+        throw std::invalid_argument("Invalid Coordinate Parameter!");
+    } else {
+        this->currentLocation = aCoord;
+    }
+
 }
 
 // Destructor

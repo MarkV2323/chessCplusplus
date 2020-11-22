@@ -6,8 +6,8 @@ class Pawn : public Piece {
 public:
     // Constructors
     Pawn() : Piece() { };
-    Pawn(std::string aSymbol, int aValue, enum enumTeam aTeam, Coord* aCoord)
-            : Piece(aSymbol, aValue, aTeam, aCoord) { };
+    Pawn(enum enumTeam aTeam, Coord* aCoord)
+            : Piece("P", 1, aTeam, aCoord) { };
 
     // Destructor
     ~Pawn() { };
