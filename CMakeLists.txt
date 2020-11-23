@@ -1,7 +1,8 @@
 CMAKE_MINIMUM_REQUIRED(VERSION 2.8)
 
-ADD_SUBDIRECTORY(googletest)
+project(finalProject)
 
+ADD_SUBDIRECTORY(googletest)
 SET(CMAKE_CXX_STANDARD 11)
 
 ADD_EXECUTABLE(chess
@@ -9,15 +10,19 @@ ADD_EXECUTABLE(chess
     src/Coord.cpp
     src/Board.cpp
     src/Piece.cpp
+    src/Pawn.cpp
 )
 
 TARGET_LINK_LIBRARIES(chess ncurses)
 
 ADD_EXECUTABLE(test
-    src/test.cpp
+    tests/test.cpp
     src/Coord.cpp
     src/Board.cpp
     src/Piece.cpp
+    src/Piece.cpp
+    src/Pawn.cpp
+    src/Coord.cpp
 )
 
 ADD_EXECUTABLE(visual_test
@@ -25,6 +30,7 @@ ADD_EXECUTABLE(visual_test
     src/Coord.cpp
     src/Board.cpp
     src/Piece.cpp
+    src/Pawn.cpp
 )
 
 TARGET_LINK_LIBRARIES(visual_test ncurses)

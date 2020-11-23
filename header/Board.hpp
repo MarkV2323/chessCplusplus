@@ -1,8 +1,8 @@
 #ifndef __BOARD_H__
 #define __BOARD_H__
 
-#include "Coord.hpp"
-#include "Piece.hpp"
+#include "../header/Coord.hpp"
+#include "../header/Piece.hpp"
 
 #include <vector>
 

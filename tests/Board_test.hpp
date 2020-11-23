@@ -1,7 +1,8 @@
 #include "gtest/gtest.h"
 
-#include "Coord.hpp"
-#include "Board.hpp"
+#include "../header/Coord.hpp"
+#include "../header/Board.hpp"
+#include "../header/Pawn.hpp"
 
 TEST(BoardTest, Cursor) {
     Board &b = Board::get();
@@ -39,7 +40,7 @@ TEST(BoardTest, HighlightedSquares) {
 TEST(BoardTest, Pieces) {
     Board &b = Board::get();
     Coord a (0,1);
-    Piece p;
+    Pawn p;
     std::vector<Coord> v;
     for (int i = 0; i < 8; ++i)
         for (int j = 0; j < 8; ++j)
