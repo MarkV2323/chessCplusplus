@@ -6,27 +6,26 @@
 
 using namespace std;
 
-enum enumPiece {};
-
 class Command {
     private:
         Coord source;
         Coord destination;
-        enum enumPiece nameOfPiece;
 
     public:
         string stringify(){
+            char sourcexchar = 'a';
+            char destxchar = 'a';
             string output;
 
-            output += source.x;
-            output += ",";
-            output += source.y;
-            output += ",";
-            output += destination.x;
-            output += ",";
-            output += destination.y;
-            output += ",";
-            output += nameOfPiece;
+            for(int i = 0; i < source.x; i++){
+                sourcexchar++;
+            }
+
+            for(int i = 0; i < destination.x; i++) {
+                destxchar++;
+            }
+
+            output = sourcexchar + static_cast<char>(source.y) + destxchar + static_cast<char>(destination.y);
 
             return output;
         }
