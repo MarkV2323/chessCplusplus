@@ -1,5 +1,6 @@
-#ifndef __COORD_HPP__
-#define __COORD_HPP__
+#ifndef FINALPROJECT_COORD_HPP
+#define FINALPROJECT_COORD_HPP
+#include <string>
 
 class Coord {
 public:
@@ -14,6 +15,9 @@ public:
     Coord& operator+=(const Coord& arg);
     Coord operator+(const Coord& rhs) const;
     bool operator==(const Coord& rhs) const;
-};
 
-#endif //__COORD_HPP__
+    // toString for x and y values.
+    std::string stringify();
+
+};
+#endif //FINALPROJECT_COORD_HPP
