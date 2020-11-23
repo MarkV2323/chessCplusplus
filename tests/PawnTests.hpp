@@ -31,7 +31,7 @@ TEST(PawnTest, badNewPawnObj) { // NOLINT(cert-err58-cpp)
 // Tests the updateLocation() function for a pawn.
 TEST(PawnTest, updateLocationOfPawn) { // NOLINT(cert-err58-cpp)
     Pawn* pawn = new Pawn(WHITE, new Coord(2, 3));
-    pawn->updateLocation(new Coord(4,4));
+    pawn->updateLocation(4, 4);
     EXPECT_EQ(pawn->getLocation()->stringify(), "(4,4)");
 }
 

@@ -37,8 +37,14 @@ Coord* Piece::getLocation() {
     return this->currentLocation;
 }
 
-void Piece::updateLocation(Coord *newPosition) {
-    // Frees the currentLocation
-    delete currentLocation;
-    this->currentLocation = newPosition;
+// THIS CURRENTLY IS BUGGED
+void Piece::updateLocation(int x, int y) {
+    // Ensures new location is within bounds.
+    if (x >= 0 && x < 8 && y >= 0 && y < 8) {
+        this->currentLocation->x = x;
+        this->currentLocation->y = y;
+    } else {
+        throw std::invalid_argument("Invalid Coordinate Parameter!");
+    }
+
 }

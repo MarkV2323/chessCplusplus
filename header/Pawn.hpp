@@ -17,6 +17,7 @@ public:
 
     // Non Virtual Functions
     bool isFirstMove() { return firstMove; }
+    void removeFirstMove() { firstMove = false; }
 
     // Virtual Functions from parent
     std::vector<Coord*> possibleMoves();

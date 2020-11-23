@@ -42,7 +42,7 @@ public:
     std::string getSymbol();
     enum enumTeam getTeam();
     Coord* getLocation();
-    void updateLocation(Coord* newPosition);
+    void updateLocation(int x, int y);
 
     // Virtual Functions
     virtual std::vector<Coord*> possibleMoves() = 0;

@@ -185,7 +185,7 @@ Board& Board::get() {
 }
 
 void Board::placePiece(Piece *p, Coord loc) {
-    p->updateLocation(&loc);
+    p->updateLocation(loc.x, loc.y);
     board[loc.y][loc.x] = p;
     drawSquarePiece(p, loc);
 }
