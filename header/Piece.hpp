@@ -27,12 +27,12 @@ private:
     std::string symbol;
     int value;
     enum enumTeam team;
-    Coord* currentLocation; // aStub for now.
+    Coord currentLocation;
 
 public:
     // Constructor
-    Piece() : symbol(" "), value(0), team(BLACK), currentLocation(nullptr) { }; // DEFAULTS
-    Piece(std::string aSymbol, int aValue, enum enumTeam aTeam, Coord* aCoord);
+    Piece() : symbol(" "), value(0), team(BLACK), currentLocation(Coord(0,0)) { }; // DEFAULTS
+    Piece(std::string aSymbol, int aValue, enum enumTeam aTeam, Coord aCoord);
 
     // Destructor
     ~Piece();
@@ -41,11 +41,11 @@ public:
     int getValue() const;
     std::string getSymbol();
     enum enumTeam getTeam();
-    Coord* getLocation();
+    Coord getLocation();
     void updateLocation(int x, int y);
 
     // Virtual Functions
-    virtual std::vector<Coord*> possibleMoves() = 0;
+    virtual std::vector<Coord> possibleMoves() = 0;
 
 };
 

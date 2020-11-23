@@ -9,7 +9,7 @@ private:
 public:
     // Constructors
     Pawn() : Piece() { };
-    Pawn(enum enumTeam aTeam, Coord* aCoord)
+    Pawn(enum enumTeam aTeam, Coord aCoord)
             : Piece("P", 1, aTeam, aCoord), firstMove(true) { };
 
     // Destructor
@@ -20,7 +20,7 @@ public:
     void removeFirstMove() { firstMove = false; }
 
     // Virtual Functions from parent
-    std::vector<Coord*> possibleMoves();
+    std::vector<Coord> possibleMoves();
 
 };
 

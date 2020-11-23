@@ -2,12 +2,12 @@
 #include <stdexcept>
 
 // Constructor
-Piece::Piece(std::string aSymbol, int aValue, enum enumTeam aTeam, Coord *aCoord) {
+Piece::Piece(std::string aSymbol, int aValue, enum enumTeam aTeam, Coord aCoord) : currentLocation(0,0) {
     this->symbol = std::move(aSymbol);
     this->value = aValue;
     this->team = aTeam;
     // Checks if passed coordinates are out of bounds.
-    if (aCoord->x < 0 || aCoord->x > 8 || aCoord->y < 0 || aCoord->y > 8) {
+    if (aCoord.x < 0 || aCoord.x > 8 || aCoord.y < 0 || aCoord.y > 8) {
         throw std::invalid_argument("Invalid Coordinate Parameter!");
     } else {
         this->currentLocation = aCoord;
@@ -16,9 +16,7 @@ Piece::Piece(std::string aSymbol, int aValue, enum enumTeam aTeam, Coord *aCoord
 }
 
 // Destructor
-Piece::~Piece() {
-    delete this->currentLocation;
-}
+Piece::~Piece() = default;
 
 // Implemented non virtual functions
 std::string Piece::getSymbol() {
@@ -33,7 +31,7 @@ enum enumTeam Piece::getTeam() {
     return this->team;
 }
 
-Coord* Piece::getLocation() {
+Coord Piece::getLocation() {
     return this->currentLocation;
 }
 
@@ -41,8 +39,8 @@ Coord* Piece::getLocation() {
 void Piece::updateLocation(int x, int y) {
     // Ensures new location is within bounds.
     if (x >= 0 && x < 8 && y >= 0 && y < 8) {
-        this->currentLocation->x = x;
-        this->currentLocation->y = y;
+        this->currentLocation.x = x;
+        this->currentLocation.y = y;
     } else {
         throw std::invalid_argument("Invalid Coordinate Parameter!");
     }
