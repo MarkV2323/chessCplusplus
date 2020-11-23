@@ -42,7 +42,3 @@ void Piece::updateLocation(Coord *newPosition) {
     delete currentLocation;
     this->currentLocation = newPosition;
 }
-
-enum enumTeam Piece::getTeam() {
-    return this->team;
-}

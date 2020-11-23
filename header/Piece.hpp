@@ -19,7 +19,7 @@
  * It is planned to return an vector with possible valid moves (coordinates) for the chess piece.
  */
 
-// Defines enum
+// Define Enum
 enum enumTeam {WHITE, BLACK};
 
 class Piece {

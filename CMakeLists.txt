@@ -30,6 +30,7 @@ ADD_EXECUTABLE(visual_test
     src/Coord.cpp
     src/Board.cpp
     src/Piece.cpp
+    src/Pawn.cpp
 )
 
 TARGET_LINK_LIBRARIES(visual_test ncurses)

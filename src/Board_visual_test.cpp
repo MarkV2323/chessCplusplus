@@ -13,10 +13,10 @@ int main() {
     Board &b = Board::get();
     b.initNCurses();
     Coord c (1,0);
-    Pawn p (WHITE, nullptr);
+    Pawn p (WHITE, &c);
     b.placePiece(&p, c);
     Coord c2 (1,1);
-    Pawn p2 (WHITE, nullptr);
+    Pawn p2 (WHITE, &c2);
     b.placePiece(&p2, c2);
     std::vector<Coord> hs = {Coord(2,0), Coord(2,1)};
     b.highlightedSquares(hs);

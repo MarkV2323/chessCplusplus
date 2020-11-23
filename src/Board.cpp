@@ -6,6 +6,7 @@
 #include <array>
 #include <curses.h>
 #include <iostream>
+#include <assert.h>
 
 // Graphics
 
@@ -184,6 +185,7 @@ Board& Board::get() {
 }
 
 void Board::placePiece(Piece *p, Coord loc) {
+    p->updateLocation(&loc);
     board[loc.y][loc.x] = p;
     drawSquarePiece(p, loc);
 }
