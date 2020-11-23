@@ -14,11 +14,15 @@ class CSVstrat : public SaveStrategy {
             ofstream file;
             file.open("moves.csv");
             for(int i = 0; i < moves.size(); i++) {
-                file << moves[i].stringify() << endl;
+                if (i == moves.size() - 1){
+                    file << moves[i].stringify() << endl;
+                }
+                else{
+                    file << moves[i].stringify()<< ", " << endl;
+                }
             }
             file.close();
         }
-
 };
 
 #endif

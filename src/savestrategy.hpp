@@ -3,6 +3,7 @@
 
 #include "command.hpp"
 #include <iostream>
+#include <vector>
 
 using namespace std;
 
