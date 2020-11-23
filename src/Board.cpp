@@ -1,12 +1,12 @@
-#include "Board.hpp"
-
-#include "Piece.hpp"
-#include "Coord.hpp"
+#include "../header/Board.hpp"
+#include "../header/Piece.hpp"
+#include "../header/Coord.hpp"
 
 #include <algorithm>
 #include <array>
 #include <curses.h>
 #include <iostream>
+#include <assert.h>
 
 // Graphics
 
@@ -185,6 +185,9 @@ Board& Board::get() {
 }
 
 void Board::placePiece(Piece *p, Coord loc) {
+    if (p != nullptr) {
+        p->updateLocation(loc.x, loc.y);
+    }
     board[loc.y][loc.x] = p;
     drawSquarePiece(p, loc);
 }

@@ -1,6 +1,6 @@
 #include "gtest/gtest.h"
 
-#include "Coord.hpp"
+#include "../header/Coord.hpp"
 
 TEST(CoordTest, Constructor) {
     Coord c (1, 2);

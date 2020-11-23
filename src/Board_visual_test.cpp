@@ -1,7 +1,7 @@
 // Crude visual test of Board.cpp's drawing
 
-#include "Piece.hpp"
-#include "Board.hpp"
+#include "../header/Pawn.hpp"
+#include "../header/Board.hpp"
 #include <curses.h>
 
 inline void wait_key_press() {
@@ -13,10 +13,10 @@ int main() {
     Board &b = Board::get();
     b.initNCurses();
     Coord c (1,0);
-    Piece p ("Pa", 0, WHITE, nullptr);
+    Pawn p (WHITE, c);
     b.placePiece(&p, c);
     Coord c2 (1,1);
-    Piece p2 ("Kni", 0, BLACK, nullptr);
+    Pawn p2 (WHITE, c2);
     b.placePiece(&p2, c2);
     std::vector<Coord> hs = {Coord(2,0), Coord(2,1)};
     b.highlightedSquares(hs);
