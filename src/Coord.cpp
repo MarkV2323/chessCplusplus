@@ -1,4 +1,4 @@
-#include "Coord.hpp"
+#include "../header/Coord.hpp"
 
 #include <cstdlib>
 
@@ -31,4 +31,10 @@ Coord Coord::operator+(const Coord& rhs) const {
 
 bool Coord::operator==(const Coord& rhs) const {
     return x == rhs.x && y == rhs.y;
+}
+
+// returns a string version of X and Y values.
+std::string Coord::stringify() {
+    std::string string = "(" + std::to_string(x) + "," + std::to_string(y) + ")";
+    return string;
 }
