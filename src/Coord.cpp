@@ -1,5 +1,7 @@
 #include "../header/Coord.hpp"
 
+#include <cstdlib>
+
 Coord::Coord(int x, int y): x(x), y(y) {};
 
 void Coord::add(const Coord &c) {
