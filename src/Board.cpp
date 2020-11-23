@@ -1,7 +1,6 @@
-#include "Board.hpp"
-
-#include "Piece.hpp"
-#include "Coord.hpp"
+#include "../header/Board.hpp"
+#include "../header/Piece.hpp"
+#include "../header/Coord.hpp"
 
 #include <algorithm>
 #include <array>
