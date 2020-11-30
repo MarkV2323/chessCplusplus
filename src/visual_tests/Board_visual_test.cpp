@@ -1,7 +1,7 @@
 // Crude visual test of Board.cpp's drawing
 
-#include "../header/Pawn.hpp"
-#include "../header/Board.hpp"
+#include "../../header/Pawn.hpp"
+#include "../../header/Board.hpp"
 #include <curses.h>
 
 inline void wait_key_press() {

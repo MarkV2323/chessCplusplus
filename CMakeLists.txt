@@ -11,6 +11,7 @@ ADD_EXECUTABLE(chess
     src/Board.cpp
     src/Piece.cpp
     src/Pawn.cpp
+    src/King.cpp
 )
 
 TARGET_LINK_LIBRARIES(chess ncurses)
@@ -20,20 +21,29 @@ ADD_EXECUTABLE(test
     src/Coord.cpp
     src/Board.cpp
     src/Piece.cpp
-    src/Piece.cpp
     src/Pawn.cpp
-    src/Coord.cpp
+    src/King.cpp
 )
 
 ADD_EXECUTABLE(visual_test
-    src/Board_visual_test.cpp
+    src/visual_tests/Board_visual_test.cpp
     src/Coord.cpp
     src/Board.cpp
     src/Piece.cpp
     src/Pawn.cpp
 )
 
+ADD_EXECUTABLE(pawn_visual_test
+        src/visual_tests/Pawn_Visual_Tester.cpp
+        src/Coord.cpp
+        src/Board.cpp
+        src/Piece.cpp
+        src/Pawn.cpp
+)
+
+
 TARGET_LINK_LIBRARIES(visual_test ncurses)
+TARGET_LINK_LIBRARIES(pawn_visual_test ncurses)
 
 TARGET_LINK_LIBRARIES(test gtest)
 TARGET_COMPILE_DEFINITIONS(test PRIVATE gtest_disable_pthreads=ON NO_GRAPHICS)

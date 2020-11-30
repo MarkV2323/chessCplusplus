@@ -1,6 +1,7 @@
 #include "../header/Pawn.hpp"
 #include "../header/Board.hpp"
 #include <vector>
+#include <iostream>
 
 /*
  * Pawn chess pieces can only directly forward one square, with two exceptions.
@@ -11,6 +12,38 @@
  */
 class Board;
 
+// in-line function for checking bounds on testLocations.
+inline bool inBounds(Coord testCoord) {
+    // Checks X
+    if (testCoord.x < 0 || testCoord.x > 7) {
+        return false;
+    }
+    // Checks Y
+    if (testCoord.y < 0 || testCoord.y > 7) {
+        return false;
+    }
+    // testCoord is within the bounds.
+    return true;
+}
+
+// Non-virtual function from parent.
+bool Pawn::isFirstMove() {
+    // Checks the current position for the first move.
+    // pawns eligible for first move must be in spawn position.
+    // North side: (0, 1) to (7, 1) team black, South side: (0, 6) to (7, 6) team white.
+    if (this->getTeam() == BLACK && getLocation().y == 1) {
+        return true;
+    } else if (this->getTeam() == WHITE && getLocation().y == 6) {
+        return true;
+    } else {
+        if (firstMove) {
+            removeFirstMove();
+        }
+        return false;
+    }
+}
+
+// Virtual function from parent.
 std::vector<Coord> Pawn::possibleMoves() {
     // vector to return.
     std::vector<Coord> possibleMoves;
@@ -21,57 +54,104 @@ std::vector<Coord> Pawn::possibleMoves() {
     // Current location
     Coord testLocation = this->getLocation();
 
-    if (firstMove) {
-        // Checks if two squares ahead is valid
-        testLocation.add(Coord(0,2));
-        // Must be either an open space (nullptr) or an enemy piece to be a valid move.
-        if (board.piece(testLocation) == nullptr ||
-            board.piece(testLocation)->getTeam() != this->getTeam()) {
-            possibleMoves.push_back(testLocation);
-        }
+    // Gets the team membership of this pawn.
+    enumTeam testTeam = getTeam();
 
-        // Checks if one square ahead is valid
-        testLocation.add(Coord(0, -1));
-        if (board.piece(testLocation) == nullptr ||
-            board.piece(testLocation)->getTeam() != this->getTeam()) {
-            possibleMoves.push_back(testLocation);
-        }
+    // North side: (0, 1) to (7, 1) team black.
+    // South side: (0, 6) to (7, 6) team white.
 
-        // Checks for valid diagonal pieces
-        testLocation.add(Coord(1, 0));
-        if (board.piece(testLocation) == nullptr ||
-            board.piece(testLocation)->getTeam() != this->getTeam()) {
-            possibleMoves.push_back(testLocation);
+    // checks if its the first move for this pawn.
+    if (isFirstMove()) {
+        // for black first move.
+        if (testTeam == BLACK) {
+            // should move in the positive coordinate direction (south).
+            // adds 2 y
+            testLocation.add(Coord(0,2));
+            // checks if valid
+            if ((board.piece(testLocation) == nullptr || board.piece(testLocation)->getTeam() != BLACK)
+                && inBounds(testLocation)) {
+                // add valid location to possibleMoves
+                possibleMoves.push_back(testLocation);
+            }
+            testLocation = this->getLocation();
         }
-
-        testLocation.add(Coord(-2, -1));
-        if (board.piece(testLocation) == nullptr ||
-            board.piece(testLocation)->getTeam() != this->getTeam()) {
-            possibleMoves.push_back(testLocation);
+        // for white first move.
+        if (testTeam == WHITE) {
+            // should move in the negative coordinate direction (north).
+            // subs 2 y
+            testLocation.add(Coord(0,-2));
+            // checks if valid
+            if ((board.piece(testLocation) == nullptr || board.piece(testLocation)->getTeam() != WHITE)
+                && inBounds(testLocation)) {
+                // add valid location to possibleMoves
+                possibleMoves.push_back(testLocation);
+            }
+            testLocation = this->getLocation();
         }
-        return possibleMoves;
     }
-    else {
-        // Checks if one square ahead is valid
-        testLocation.add(Coord(0, -1));
-        if (board.piece(testLocation) == nullptr ||
-            board.piece(testLocation)->getTeam() != this->getTeam()) {
-            possibleMoves.push_back(testLocation);
-        }
 
-        // Checks for valid diagonal pieces
-        testLocation.add(Coord(1, 0));
-        if (board.piece(testLocation) == nullptr ||
-            board.piece(testLocation)->getTeam() != this->getTeam()) {
+    // checks for possible enemy pieces (diagonal move)
+    if (testTeam == BLACK) {
+        // checks 1 east 1 south
+        testLocation.add(Coord(1,1));
+        if ((board.piece(testLocation) != nullptr && board.piece(testLocation)->getTeam() != BLACK)
+            && inBounds(testLocation)) {
             possibleMoves.push_back(testLocation);
         }
+        testLocation = this->getLocation();
 
-        testLocation.add(Coord(-2, -1));
-        if (board.piece(testLocation) == nullptr ||
-            board.piece(testLocation)->getTeam() != this->getTeam()) {
+        // checks 1 west 1 south
+        testLocation.add(Coord(-1,1));
+        if ((board.piece(testLocation) != nullptr && board.piece(testLocation)->getTeam() != BLACK)
+            && inBounds(testLocation)) {
             possibleMoves.push_back(testLocation);
         }
-        return possibleMoves;
+        testLocation = this->getLocation();
     }
+    if (testTeam == WHITE) {
+        // checks 1 east 1 north
+        testLocation.add(Coord(1,-1));
+        if ((board.piece(testLocation) != nullptr && board.piece(testLocation)->getTeam() != WHITE)
+            && inBounds(testLocation)) {
+            possibleMoves.push_back(testLocation);
+        }
+        testLocation = this->getLocation();
+
+        // checks 1 west 1 north
+        testLocation.add(Coord(-1,-1));
+        if ((board.piece(testLocation) != nullptr && board.piece(testLocation)->getTeam() != WHITE)
+            && inBounds(testLocation)) {
+            possibleMoves.push_back(testLocation);
+        }
+        testLocation = this->getLocation();
+    }
+
+    // checks for possible 1 space move.
+    if (testTeam == BLACK) {
+        // checks 1 south
+        testLocation.add(Coord(0,1));
+        if ((board.piece(testLocation) == nullptr || board.piece(testLocation)->getTeam() != BLACK)
+            && inBounds(testLocation)) {
+            possibleMoves.push_back(testLocation);
+        }
+        testLocation = this->getLocation();
+    }
+    if (testTeam == WHITE) {
+        // checks 1 north
+        testLocation.add(Coord(0,-1));
+        if ((board.piece(testLocation) == nullptr || board.piece(testLocation)->getTeam() != WHITE)
+            && inBounds(testLocation)) {
+            possibleMoves.push_back(testLocation);
+        }
+        testLocation = this->getLocation();
+    }
+
+    // returns an empty vector if no possible moves exist.
+    if (possibleMoves.empty()) {
+        return {};
+    }
+
+    // returns the possibleMoves vector.
+    return possibleMoves;
 
 }

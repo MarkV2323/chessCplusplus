@@ -16,7 +16,7 @@ public:
     ~Pawn() { };
 
     // Non Virtual Functions
-    bool isFirstMove() { return firstMove; }
+    bool isFirstMove();
     void removeFirstMove() { firstMove = false; }
 
     // Virtual Functions from parent

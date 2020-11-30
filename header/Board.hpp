@@ -35,6 +35,9 @@ public:
     // and destroys the NCurses session.
     void reset();
 
+    // Removes all pieces from the board, deleting them.
+    void clearBoard();
+
     // Moves the cursor one square, wrapping around the board if the edge is reached
     void moveCursor(enum Direction);
     // Returns the current cursor position
