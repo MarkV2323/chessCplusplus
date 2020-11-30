@@ -57,3 +57,29 @@ TEST(BoardTest, Pieces) {
     for (auto c: v)
         EXPECT_EQ(b.piece(c), nullptr);
 }
+
+TEST(BoardTest, Reset) {
+    Board &b = Board::get();
+    Coord a (0,1);
+    Pawn *p = new Pawn();
+    std::vector<Coord> v;
+    for (int i = 0; i < 8; ++i)
+        for (int j = 0; j < 8; ++j)
+            v.push_back(Coord(i,j));
+
+    Coord c = v.back();
+    v.pop_back();
+    // place a piece
+    b.placePiece(p, c);
+    EXPECT_EQ(b.piece(c), p);
+    for (auto c: v)
+        EXPECT_EQ(b.piece(c), nullptr);
+
+    b.reset();
+
+    // board should be empty
+    for (auto c: v)
+        EXPECT_EQ(b.piece(c), nullptr);
+    EXPECT_TRUE(b.highlightedSquares().empty());
+    EXPECT_EQ(b.cursor(), Coord(0,0));
+}

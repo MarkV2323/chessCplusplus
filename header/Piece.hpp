@@ -35,7 +35,7 @@ public:
     Piece(std::string aSymbol, int aValue, enum enumTeam aTeam, Coord aCoord);
 
     // Destructor
-    ~Piece();
+    virtual ~Piece();
 
     // Non Virtual Functions
     int getValue() const;

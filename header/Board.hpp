@@ -7,23 +7,33 @@
 #include <vector>
 
 enum Direction {UP, DOWN, LEFT, RIGHT};
+enum BorderType { NONE, CURSOR, HIGHLIGHTED };
 
 class Board {
 private:
     // These are private so that Board can properly update graphics when they change
     Piece *board[8][8] = {nullptr};
-    Coord cursor_ = Coord(0,0);
+    Coord cursor_ = Coord(0, 0);
     std::vector<Coord> highlightedSquares_;
 
+    void drawSquare(const Coord &c, enum BorderType border);
     void drawCursor();
     void eraseCursor();
+    Board() {};
 
 public:
+    Board(const Board&) = delete;
+
     // Returns the singleton instance
     static Board& get();
 
+    // Creates an NCurses session, taking over the terminal and
+    // drawing a chess board. This needs to be called before the board
+    // is used for anything else.
     void initNCurses();
-    void cleanupNCurses();
+    // Deletes all Pieces, resets member variables to initial states,
+    // and destroys the NCurses session.
+    void reset();
 
     // Moves the cursor one square, wrapping around the board if the edge is reached
     void moveCursor(enum Direction);
