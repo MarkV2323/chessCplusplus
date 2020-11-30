@@ -36,7 +36,9 @@ bool Pawn::isFirstMove() {
     } else if (this->getTeam() == WHITE && getLocation().y == 6) {
         return true;
     } else {
-        removeFirstMove();
+        if (firstMove) {
+            removeFirstMove();
+        }
         return false;
     }
 }

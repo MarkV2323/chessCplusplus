@@ -1,7 +1,7 @@
 #include <curses.h>
 #include <iostream>
-#include "../header/Board.hpp"
-#include "../header/Pawn.hpp"
+#include "../../header/Board.hpp"
+#include "../../header/Pawn.hpp"
 
 // Pause Function (n to continue)
 inline void wait_key_press() {
@@ -109,6 +109,16 @@ int main() {
     b.highlightedSquares(possibleMoves);
 
     // Updates and draws board.
+    b.drawTick();
+
+    // Lets user move cursor on the board.
+    move_cursor(b);
+
+    // clears the board & highlighted squares. (example of what clearing the board completely)
+    b.clearBoard();
+    b.highlightedSquares({});
+
+    // updates the board
     b.drawTick();
 
     // Lets user move cursor on the board.

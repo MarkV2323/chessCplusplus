@@ -25,6 +25,9 @@ public:
     void initNCurses();
     void cleanupNCurses();
 
+    // cleans the board.
+    void clearBoard();
+
     // Moves the cursor one square, wrapping around the board if the edge is reached
     void moveCursor(enum Direction);
     // Returns the current cursor position

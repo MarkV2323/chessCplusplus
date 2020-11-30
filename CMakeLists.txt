@@ -26,7 +26,7 @@ ADD_EXECUTABLE(test
 )
 
 ADD_EXECUTABLE(visual_test
-    src/Board_visual_test.cpp
+    src/visual_tests/Board_visual_test.cpp
     src/Coord.cpp
     src/Board.cpp
     src/Piece.cpp
@@ -34,7 +34,7 @@ ADD_EXECUTABLE(visual_test
 )
 
 ADD_EXECUTABLE(pawn_visual_test
-        src/Pawn_Visual_Tester.cpp
+        src/visual_tests/Pawn_Visual_Tester.cpp
         src/Coord.cpp
         src/Board.cpp
         src/Piece.cpp
