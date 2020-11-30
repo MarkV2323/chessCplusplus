@@ -150,6 +150,15 @@ void Board::drawCursor() {
 
 // Board
 
+// sets all pieces on the board to nullptrs.
+void Board::clearBoard() {
+    for (int i = 0; i < 8; i++) {
+        for (int j = 0; j < 8; j++) {
+            placePiece(nullptr, Coord(j, i));
+        }
+    }
+}
+
 void Board::moveCursor(enum Direction dir) {
     eraseCursor();
     switch(dir) {
