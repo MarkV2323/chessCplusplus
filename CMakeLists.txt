@@ -41,6 +41,8 @@ ADD_EXECUTABLE(pawn_visual_test
         src/Board.cpp
         src/Piece.cpp
         src/Pawn.cpp
+        src/King.cpp
+        src/Knight.cpp
 )
 
 
