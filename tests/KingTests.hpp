@@ -43,11 +43,11 @@ TEST(KingTest, kingMoves) { // NOLINT(cert-err58-cpp)
     Board &b = Board::get();
 
     // Places a white king on the board.
-    King king1 (WHITE, Coord(3, 3));
-    b.placePiece(&king1, king1.getLocation());
+    King *king1 = new King(WHITE, Coord(3, 3));
+    b.placePiece(king1, king1->getLocation());
 
     // Gets possible moves of king1.
-    std::vector<Coord> king1Moves = king1.possibleMoves();
+    std::vector<Coord> king1Moves = king1->possibleMoves();
 
     // Goes through the possible moves, ensuring each one is correct.
     EXPECT_EQ(king1Moves.size(),8);
@@ -75,11 +75,11 @@ TEST(KingTest, kingMovesByBoardBorder) { // NOLINT(cert-err58-cpp)
     Board &b = Board::get();
 
     // Places a white king on the board.
-    King king1 (WHITE, Coord(0, 3));
-    b.placePiece(&king1, king1.getLocation());
+    King *king1 = new King(WHITE, Coord(0, 3));
+    b.placePiece(king1, king1->getLocation());
 
     // Gets possible moves of king1.
-    std::vector<Coord> king1Moves = king1.possibleMoves();
+    std::vector<Coord> king1Moves = king1->possibleMoves();
 
     // Goes through the possible moves, ensuring each one is correct.
     EXPECT_EQ(king1Moves.size(),5);
@@ -104,19 +104,19 @@ TEST(KingTest, kingMovesByFriendly) { // NOLINT(cert-err58-cpp)
     Board &b = Board::get();
 
     // Places a white king on the board.
-    King king1 (WHITE, Coord(0, 0));
-    b.placePiece(&king1, king1.getLocation());
+    King *king1 = new King(WHITE, Coord(0, 0));
+    b.placePiece(king1, king1->getLocation());
 
     // Places a black pawn on the board.
-    Pawn pawn1 (BLACK, Coord(1,0));
-    b.placePiece(&pawn1, pawn1.getLocation());
+    Pawn *pawn1 = new Pawn(BLACK, Coord(1,0));
+    b.placePiece(pawn1, pawn1->getLocation());
 
     // Places a white pawn on the board.
-    Pawn pawn2 (WHITE, Coord(0,1));
-    b.placePiece(&pawn2, pawn2.getLocation());
+    Pawn *pawn2 = new Pawn(WHITE, Coord(0,1));
+    b.placePiece(pawn2, pawn2->getLocation());
 
     // Gets possible moves of king1.
-    std::vector<Coord> king1Moves = king1.possibleMoves();
+    std::vector<Coord> king1Moves = king1->possibleMoves();
 
     // Goes through the possible moves, ensuring each one is correct.
     EXPECT_EQ(king1Moves.size(),2);
@@ -132,25 +132,26 @@ TEST(KingTest, kingNoMoves) { // NOLINT(cert-err58-cpp)
 
     // init board.
     Board &b = Board::get();
+    b.clearBoard();
 
     // Places a white king on the board.
-    King king1 (WHITE, Coord(0, 0));
-    b.placePiece(&king1, king1.getLocation());
+    King *king1 = new King(WHITE, Coord(0, 0));
+    b.placePiece(king1, king1->getLocation());
 
     // Places a white pawn on the board.
-    Pawn pawn1 (WHITE, Coord(1,0));
-    b.placePiece(&pawn1, pawn1.getLocation());
+    Pawn *pawn1 = new Pawn(WHITE, Coord(1,0));
+    b.placePiece(pawn1, pawn1->getLocation());
 
     // Places a white pawn on the board.
-    Pawn pawn2 (WHITE, Coord(1,1));
-    b.placePiece(&pawn2, pawn2.getLocation());
+    Pawn *pawn2 = new Pawn(WHITE, Coord(1,1));
+    b.placePiece(pawn2, pawn2->getLocation());
 
     // Places a white pawn on the board.
-    Pawn pawn3 (WHITE, Coord(0,1));
-    b.placePiece(&pawn3, pawn3.getLocation());
+    Pawn *pawn3 = new Pawn(WHITE, Coord(0,1));
+    b.placePiece(pawn3, pawn3->getLocation());
 
     // Gets possible moves of king1.
-    std::vector<Coord> king1Moves = king1.possibleMoves();
+    std::vector<Coord> king1Moves = king1->possibleMoves();
 
     // Goes through the possible moves, ensuring each one is correct.
     EXPECT_EQ(king1Moves.size(),0);

@@ -19,17 +19,10 @@ inline bool inBounds(Coord testCoord) {
 
 // in-line function for checking basic principals of available moves
 // (null ptr, friendly piece, out of bounds)
-inline bool basicCheck(Coord testCoord, Board board, enumTeam team) {
-    if (team == WHITE) {
-        if ((board.piece(testCoord) == nullptr || board.piece(testCoord)->getTeam() != WHITE)
-            && inBounds(testCoord)) {
-            return true;
-        }
-    } else if (team == BLACK) {
-        if ((board.piece(testCoord) == nullptr || board.piece(testCoord)->getTeam() != BLACK)
-            && inBounds(testCoord)) {
-            return true;
-        }
+inline bool basicCheck(Coord testCoord, Board &board, enumTeam team) {
+    if (inBounds(testCoord)) {
+        Piece *p = board.piece(testCoord);
+        return (p == nullptr) || (p->getTeam() != team);
     }
     return false;
 }
@@ -38,7 +31,7 @@ std::vector<Coord> King::possibleMoves() {
 
     // vector to return.
     std::vector<Coord> possibleMoves;
-    Board board = Board::get();
+    Board &board = Board::get();
     enumTeam team = getTeam();
     Coord currentLocation = this->getLocation();
     Coord testLocation = currentLocation;
@@ -53,13 +46,12 @@ std::vector<Coord> King::possibleMoves() {
     }
 
     // checks center.
-    for (int i = -1; i < 2;) {
+    for (int i = -1; i < 2; i+=2) {
         testLocation.add(Coord(i, 0));
         if (basicCheck(testLocation, board, team)) {
             possibleMoves.push_back(testLocation);
         }
         testLocation = currentLocation;
-        i += 2;
     }
 
     // checks south.

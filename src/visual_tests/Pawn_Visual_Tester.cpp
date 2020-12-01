@@ -52,51 +52,51 @@ int main() {
     b.initNCurses();
 
     // Places a black pawn on the board.
-    Pawn p1 (BLACK, Coord(1,1));
-    b.placePiece(&p1, p1.getLocation());
+    Pawn *p1 = new Pawn(BLACK, Coord(1,1));
+    b.placePiece(p1, p1->getLocation());
 
     // Places a white pawn on the board.
-    Pawn p2 (WHITE, Coord(1,6));
-    b.placePiece(&p2, p2.getLocation());
+    Pawn *p2 = new Pawn(WHITE, Coord(1,6));
+    b.placePiece(p2, p2->getLocation());
 
     // Places enemy pawns on board to check possible diagonal moves.
-    Pawn badPawn1 (BLACK, Coord(0, 5));
-    Pawn badPawn2 (BLACK, Coord(2, 5));
-    Pawn badPawn3 (WHITE, Coord(0, 2));
-    Pawn badPawn4 (WHITE, Coord(2, 2));
-    b.placePiece(&badPawn1, badPawn1.getLocation());
-    b.placePiece(&badPawn2, badPawn2.getLocation());
-    b.placePiece(&badPawn3, badPawn3.getLocation());
-    b.placePiece(&badPawn4, badPawn4.getLocation());
+    Pawn *badPawn1 = new Pawn(BLACK, Coord(0, 5));
+    Pawn *badPawn2 = new Pawn(BLACK, Coord(2, 5));
+    Pawn *badPawn3 = new Pawn(WHITE, Coord(0, 2));
+    Pawn *badPawn4 = new Pawn(WHITE, Coord(2, 2));
+    b.placePiece(badPawn1, badPawn1->getLocation());
+    b.placePiece(badPawn2, badPawn2->getLocation());
+    b.placePiece(badPawn3, badPawn3->getLocation());
+    b.placePiece(badPawn4, badPawn4->getLocation());
 
     // Places another black pawn on the board.
-    Pawn p3 (BLACK, Coord(5,2));
-    b.placePiece(&p3, p3.getLocation());
+    Pawn *p3 = new Pawn(BLACK, Coord(5,2));
+    b.placePiece(p3, p3->getLocation());
 
     // Places another black pawn on the board.
-    Pawn p4 (WHITE, Coord(5,5));
-    b.placePiece(&p4, p4.getLocation());
+    Pawn *p4 = new Pawn(WHITE, Coord(5,5));
+    b.placePiece(p4, p4->getLocation());
 
     // Places enemy pawns on board to check possible diagonal moves.
-    Pawn badPawn5 (WHITE, Coord(6, 3));
-    Pawn badPawn6 (BLACK, Coord(4, 4));
-    b.placePiece(&badPawn5, badPawn5.getLocation());
-    b.placePiece(&badPawn6, badPawn6.getLocation());
+    Pawn *badPawn5 = new Pawn(WHITE, Coord(6, 3));
+    Pawn *badPawn6 = new Pawn(BLACK, Coord(4, 4));
+    b.placePiece(badPawn5, badPawn5->getLocation());
+    b.placePiece(badPawn6, badPawn6->getLocation());
 
     // Showcases some invalid moves (being at the end of the board for example, or blocked by friendly piece.)
-    Pawn p5 (WHITE, Coord(6,0));
-    b.placePiece(&p5, p5.getLocation());
-    Pawn p6 (WHITE, Coord(6,1));
-    b.placePiece(&p6, p6.getLocation());
+    Pawn *p5 = new Pawn(WHITE, Coord(6,0));
+    b.placePiece(p5, p5->getLocation());
+    Pawn *p6 = new Pawn(WHITE, Coord(6,1));
+    b.placePiece(p6, p6->getLocation());
 
     // Highlights possible moves of both pawns. (merges both possibleMoves into one vector)
     std::vector<Coord> possibleMoves;
-    std::vector<Coord> pawn1Moves = p1.possibleMoves();
-    std::vector<Coord> pawn2Moves = p2.possibleMoves();
-    std::vector<Coord> pawn3Moves = p3.possibleMoves();
-    std::vector<Coord> pawn4Moves = p4.possibleMoves();
-    std::vector<Coord> pawn5Moves = p5.possibleMoves();
-    std::vector<Coord> pawn6Moves = p6.possibleMoves();
+    std::vector<Coord> pawn1Moves = p1->possibleMoves();
+    std::vector<Coord> pawn2Moves = p2->possibleMoves();
+    std::vector<Coord> pawn3Moves = p3->possibleMoves();
+    std::vector<Coord> pawn4Moves = p4->possibleMoves();
+    std::vector<Coord> pawn5Moves = p5->possibleMoves();
+    std::vector<Coord> pawn6Moves = p6->possibleMoves();
 
     possibleMoves.reserve(pawn1Moves.size() + pawn2Moves.size() + pawn3Moves.size() + pawn4Moves.size()
     + pawn5Moves.size() + pawn6Moves.size());
@@ -125,6 +125,6 @@ int main() {
     move_cursor(b);
 
     // Cleanup and exit.
-    b.cleanupNCurses();
+    b.reset();
     return 0;
 }

@@ -42,17 +42,17 @@ TEST(PawnTest, pawnMoves) { // NOLINT(cert-err58-cpp)
     Board &b = Board::get();
 
     // Places a black pawn on the board.
-    Pawn p1 (BLACK, Coord(1,1));
-    b.placePiece(&p1, p1.getLocation());
+    Pawn *p1 = new Pawn(BLACK, Coord(1,1));
+    b.placePiece(p1, p1->getLocation());
 
     // Places two enemy pawns on the board.
-    Pawn badPawn1 (WHITE, Coord(0, 2));
-    Pawn badPawn2 (WHITE, Coord(2, 2));
-    b.placePiece(&badPawn1, badPawn1.getLocation());
-    b.placePiece(&badPawn2, badPawn2.getLocation());
+    Pawn *badPawn1 = new Pawn(WHITE, Coord(0, 2));
+    Pawn *badPawn2 = new Pawn(WHITE, Coord(2, 2));
+    b.placePiece(badPawn1, badPawn1->getLocation());
+    b.placePiece(badPawn2, badPawn2->getLocation());
 
-    // Gets possible moves of p1.
-    std::vector<Coord> pawn1Moves = p1.possibleMoves();
+    // Gets possible moves of p1
+    std::vector<Coord> pawn1Moves = p1->possibleMoves();
 
     // Goes through the possible moves, ensuring each one is correct.
     EXPECT_EQ(pawn1Moves.size(),4);
@@ -71,15 +71,15 @@ TEST(PawnTest, pawnMovesByBoardBorder) { // NOLINT(cert-err58-cpp)
     Board &b = Board::get();
 
     // Places a black pawn on the board.
-    Pawn p1 (BLACK, Coord(0,1));
-    b.placePiece(&p1, p1.getLocation());
+    Pawn *p1 = new Pawn(BLACK, Coord(0,1));
+    b.placePiece(p1, p1->getLocation());
 
     // Places one enemy pawns on the board.
-    Pawn badPawn1 (WHITE, Coord(1, 2));
-    b.placePiece(&badPawn1, badPawn1.getLocation());
+    Pawn *badPawn1 = new Pawn(WHITE, Coord(1, 2));
+    b.placePiece(badPawn1, badPawn1->getLocation());
 
-    // Gets possible moves of p1.
-    std::vector<Coord> pawn1Moves = p1.possibleMoves();
+    // Gets possible moves of p1
+    std::vector<Coord> pawn1Moves = p1->possibleMoves();
 
     // Goes through the possible moves, ensuring each one is correct.
     EXPECT_EQ(pawn1Moves.size(),3);
@@ -97,21 +97,21 @@ TEST(PawnTest, pawnMovesByFriendly) { // NOLINT(cert-err58-cpp)
     Board &b = Board::get();
 
     // Places a black pawn on the board.
-    Pawn p1 (BLACK, Coord(1,1));
-    b.placePiece(&p1, p1.getLocation());
+    Pawn *p1 = new Pawn(BLACK, Coord(1,1));
+    b.placePiece(p1, p1->getLocation());
 
     // Places one enemy pawns on the board.
-    Pawn badPawn1 (WHITE, Coord(2, 2));
-    b.placePiece(&badPawn1, badPawn1.getLocation());
+    Pawn *badPawn1 = new Pawn(WHITE, Coord(2, 2));
+    b.placePiece(badPawn1, badPawn1->getLocation());
 
     // Places a two friendly pawns on the board.
-    Pawn badPawn2 (BLACK, Coord(1, 2));
-    b.placePiece(&badPawn2, badPawn2.getLocation());
-    Pawn badPawn3 (BLACK, Coord(1, 3));
-    b.placePiece(&badPawn3, badPawn3.getLocation());
+    Pawn *badPawn2 = new Pawn(BLACK, Coord(1, 2));
+    b.placePiece(badPawn2, badPawn2->getLocation());
+    Pawn *badPawn3 = new Pawn(BLACK, Coord(1, 3));
+    b.placePiece(badPawn3, badPawn3->getLocation());
 
-    // Gets possible moves of p1.
-    std::vector<Coord> pawn1Moves = p1.possibleMoves();
+    // Gets possible moves of p1
+    std::vector<Coord> pawn1Moves = p1->possibleMoves();
 
     // Goes through the possible moves, ensuring each one is correct.
     EXPECT_EQ(pawn1Moves.size(),1);
@@ -127,17 +127,17 @@ TEST(PawnTest, pawnMovesNoMoves) { // NOLINT(cert-err58-cpp)
     Board &b = Board::get();
 
     // Places a black pawn on the board.
-    Pawn p1 (BLACK, Coord(1,1));
-    b.placePiece(&p1, p1.getLocation());
+    Pawn *p1 = new Pawn(BLACK, Coord(1,1));
+    b.placePiece(p1, p1->getLocation());
 
     // Places a two friendly pawns on the board.
-    Pawn badPawn2 (BLACK, Coord(1, 2));
-    b.placePiece(&badPawn2, badPawn2.getLocation());
-    Pawn badPawn3 (BLACK, Coord(1, 3));
-    b.placePiece(&badPawn3, badPawn3.getLocation());
+    Pawn *badPawn2 = new Pawn(BLACK, Coord(1, 2));
+    b.placePiece(badPawn2, badPawn2->getLocation());
+    Pawn *badPawn3 = new Pawn(BLACK, Coord(1, 3));
+    b.placePiece(badPawn3, badPawn3->getLocation());
 
-    // Gets possible moves of p1.
-    std::vector<Coord> pawn1Moves = p1.possibleMoves();
+    // Gets possible moves of p1
+    std::vector<Coord> pawn1Moves = p1->possibleMoves();
 
     // Goes through the possible moves, ensuring each one is correct.
     EXPECT_EQ(pawn1Moves.size(),0);

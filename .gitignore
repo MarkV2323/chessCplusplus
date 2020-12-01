@@ -4,8 +4,10 @@ test
 cmake-build-wsl
 chess
 visual_test
+pawn_visual_test
 CMakeCache.txt
 CmakeFiles
 Makefile
 cmake_install.cmake
+lib/
 *~

@@ -40,7 +40,35 @@ static void refreshAllSquares() {
 #endif
 }
 
-static void drawSquarePiece(Piece *p, Coord loc) {
+static void eraseBorder(const Coord &c) {
+#ifndef NO_GRAPHICS
+    wborder(getSquare(c), ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ');
+#endif
+}
+
+// Don't call this function directly, call drawSquare to ensure that
+// that the Piece's color at this location is not messed up
+static void drawBorder(const Coord &c, bool isCursor) {
+#ifndef NO_GRAPHICS
+    if (isCursor) {
+        WINDOW* w = getSquare(c);
+        if (isBlackSquare(c))
+            wbkgd(w, COLOR_PAIR(1));
+        else
+            wbkgd(w, COLOR_PAIR(2));
+        box(w, '|', '-');
+    } else {
+        WINDOW* w = getSquare(c);
+        if (isBlackSquare(c))
+            wbkgd(w, COLOR_PAIR(3));
+        else
+            wbkgd(w, COLOR_PAIR(4));
+        box(w, '|', '-');
+    }
+#endif
+}
+
+static void drawPiece(Piece *p, Coord loc) {
 #ifndef NO_GRAPHICS
     WINDOW* w = getSquare(loc);
     // erase current printed symbol
@@ -66,29 +94,11 @@ static void drawSquarePiece(Piece *p, Coord loc) {
 #endif
 }
 
-static void drawBorder(const Coord &c, bool isCursor) {
+static void drawSquare(Piece *p, const Coord &c, enum BorderType border) {
 #ifndef NO_GRAPHICS
-    if (isCursor) {
-        WINDOW* w = getSquare(c);
-        if (isBlackSquare(c))
-            wbkgd(w, COLOR_PAIR(1));
-        else
-            wbkgd(w, COLOR_PAIR(2));
-        box(w, '|', '-');
-    } else {
-        WINDOW* w = getSquare(c);
-        if (isBlackSquare(c))
-            wbkgd(w, COLOR_PAIR(3));
-        else
-            wbkgd(w, COLOR_PAIR(4));
-        box(w, '|', '-');
-    }
-#endif
-}
-
-static void eraseBorder(const Coord &c) {
-#ifndef NO_GRAPHICS
-    wborder(getSquare(c), ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ');
+    if (border != NONE) drawBorder(c, border==CURSOR);
+    //else eraseBorder(c);
+    if (p) drawPiece(p, c);
 #endif
 }
 
@@ -119,7 +129,7 @@ void Board::initNCurses() {
 #endif
 }
 
-void Board::cleanupNCurses() {
+static void cleanupNCurses() {
 #ifndef NO_GRAPHICS
     for (auto square: wsquares)
         delwin(square);
@@ -133,6 +143,10 @@ void Board::drawTick() {
 #endif
 }
 
+void Board::drawSquare(const Coord &c, enum BorderType border) {
+    ::drawSquare(piece(c), c, border);
+}
+
 void Board::eraseCursor() {
     eraseBorder(cursor_);
     if (std::find(highlightedSquares_.begin(),
@@ -140,20 +154,30 @@ void Board::eraseCursor() {
                   cursor_)
         != highlightedSquares_.end())
         // The square with the cursor is highlighted. Make sure to restore its highlighting.
-        drawBorder(cursor_, false);
-        ;
+        drawSquare(cursor_, HIGHLIGHTED);
 }
 
 void Board::drawCursor() {
-    drawBorder(cursor_, true);
+    drawSquare(cursor_, CURSOR);
 }
 
 // Board
+
+void Board::reset() {
+    Piece **b = (Piece**)board;
+    for (int i = 0; i < 8*8; ++i)
+        if (b[i]) delete b[i];
+    bzero(b, 8*8*sizeof(*b));
+    cursor_ = Coord(0,0);
+    highlightedSquares_.clear();
+    cleanupNCurses();
+}
 
 // sets all pieces on the board to nullptrs.
 void Board::clearBoard() {
     for (int i = 0; i < 8; i++) {
         for (int j = 0; j < 8; j++) {
+            delete piece(Coord(j, i));
             placePiece(nullptr, Coord(j, i));
         }
     }
@@ -179,7 +203,7 @@ void Board::highlightedSquares(std::vector<Coord> v) {
         eraseBorder(c);
     highlightedSquares_ = std::move(v);
     for (auto c: highlightedSquares_)
-        drawBorder(c, false);
+        drawSquare(c, HIGHLIGHTED);
     // cursor may have been erased or covered up; redraw
     drawCursor();
 }
@@ -198,7 +222,7 @@ void Board::placePiece(Piece *p, Coord loc) {
         p->updateLocation(loc.x, loc.y);
     }
     board[loc.y][loc.x] = p;
-    drawSquarePiece(p, loc);
+    drawPiece(p, loc);
 }
 
 Piece* Board::piece(Coord loc) {

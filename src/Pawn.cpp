@@ -49,7 +49,7 @@ std::vector<Coord> Pawn::possibleMoves() {
     std::vector<Coord> possibleMoves;
 
     // board instance.
-    Board board = Board::get();
+    Board &board = Board::get();
 
     // Current location
     Coord testLocation = this->getLocation();
