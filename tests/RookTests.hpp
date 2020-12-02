@@ -36,6 +36,10 @@ TEST(RookTest, updateLocationOfRook) { // NOLINT(cert-err58-cpp)
 
 // Tests the possibleMoves() function for a Rook.
 TEST(RookTest, rookMoves) { // NOLINT(cert-err58-cpp)
+    // init board.
+    Board &b = Board::get();
+    b.clearBoard();
+
     auto *rook1 = new Rook(WHITE, Coord(3, 3));
     std::vector<Coord> rook1Moves = rook1->possibleMoves();
 //    for (int i = 0; i < rook1Moves.size(); i++) {

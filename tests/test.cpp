@@ -6,6 +6,7 @@
 #include "KingTests.hpp"
 #include "KnightTests.hpp"
 #include "RookTests.hpp"
+#include "BishopTests.hpp"
 
 int main(int argc, char **argv) {
   ::testing::InitGoogleTest(&argc, argv);

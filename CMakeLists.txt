@@ -13,6 +13,8 @@ ADD_EXECUTABLE(chess
     src/Pawn.cpp
     src/King.cpp
     src/Knight.cpp
+    src/Rook.cpp
+    src/Bishop.cpp
 )
 
 TARGET_LINK_LIBRARIES(chess ncurses)
@@ -26,6 +28,7 @@ ADD_EXECUTABLE(test
     src/King.cpp
     src/Knight.cpp
     src/Rook.cpp
+    src/Bishop.cpp
 )
 
 ADD_EXECUTABLE(visual_test
