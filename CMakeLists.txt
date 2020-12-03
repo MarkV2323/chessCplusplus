@@ -14,6 +14,11 @@ ADD_EXECUTABLE(chess
     src/King.cpp
     src/Timer.cpp
     src/Draw.cpp
+    src/Human.cpp
+    src/Knight.cpp
+    src/Rook.cpp
+    src/Bishop.cpp
+    src/Queen.cpp
 )
 
 TARGET_LINK_LIBRARIES(chess ncurses)
@@ -28,6 +33,10 @@ ADD_EXECUTABLE(test
     src/Timer.cpp
     src/Human.cpp
     src/Draw.cpp
+    src/Knight.cpp
+    src/Rook.cpp
+    src/Bishop.cpp
+    src/Queen.cpp
 )
 
 ADD_EXECUTABLE(visual_test
@@ -52,6 +61,8 @@ ADD_EXECUTABLE(pawn_visual_test
 	src/Timer.cpp
 	src/Human.cpp
 	src/Draw.cpp
+        src/King.cpp
+        src/Knight.cpp
 )
 
 TARGET_LINK_LIBRARIES(pawn_visual_test ncurses)

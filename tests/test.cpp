@@ -4,6 +4,10 @@
 #include "Board_test.hpp"
 #include "PawnTests.hpp"
 #include "KingTests.hpp"
+#include "KnightTests.hpp"
+#include "RookTests.hpp"
+#include "BishopTests.hpp"
+#include "QueenTests.hpp"
 #include "Game_test.hpp"
 #include "Human_test.hpp"
 

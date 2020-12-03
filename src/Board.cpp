@@ -7,6 +7,8 @@
 #include <array>
 #include <iostream>
 
+#include <strings.h>
+
 // Graphics
 
 void Board::drawSquare(const Coord &c, enum BorderType border) {
