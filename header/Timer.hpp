@@ -5,6 +5,7 @@
 
 class Timer {
 private:
+    int startTime;
     clock_t time;
     clock_t t0;
 public:
