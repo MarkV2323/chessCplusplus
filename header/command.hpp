@@ -12,6 +12,8 @@ class Command {
         Coord destination;
 
     public:
+    Command(Coord s, Coord d): source(s), destination(d) {};
+
         string stringify(){
             char sourcexchar = 'a';
             char destxchar = 'a';
