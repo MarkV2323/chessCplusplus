@@ -15,5 +15,5 @@ void Timer::startTimer() {
 void Timer::tick() {
     clock_t t = clock();
     time -= t - t0;
-    t = t0;
+    t0 = t;
 }
