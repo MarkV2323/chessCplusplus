@@ -21,6 +21,8 @@ private:
     void drawSquare(const Coord &c, enum BorderType border);
     void drawCursor();
     void eraseCursor();
+
+    Piece** pieceSlot(Coord);
     Board() = default;
 
 public:
@@ -48,8 +50,15 @@ public:
     void highlightedSquares(std::vector<Coord>);
     const std::vector<Coord>& highlightedSquares();
 
+    // Properly deletes the piece at LOC, freeing its used memory
+    void maybeRemovePiece(Coord loc);
+    // Sets the piece at LOC to P. Does not delete the piece at loc if
+    // there is one.
     void placePiece(Piece* p, Coord loc);
     Piece* piece(Coord loc);
+
+    bool isInCheck(enum Team team);
+    bool canMakeMove(enum Team team);
 
     void drawTick();
 };

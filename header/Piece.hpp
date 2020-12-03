@@ -45,6 +45,9 @@ public:
     // Virtual Functions
     virtual std::vector<Coord> possibleMoves() = 0;
 
+    // most pieces can only capture by moving to an enemy piece. The
+    // default capture function will simpy delete the piece at dst.
+    virtual void capture(Coord dst);
 };
 
 

@@ -13,6 +13,7 @@ ADD_EXECUTABLE(chess
     src/Pawn.cpp
     src/King.cpp
     src/Timer.cpp
+    src/Game.cpp
     src/Draw.cpp
     src/Human.cpp
     src/Knight.cpp
@@ -31,6 +32,7 @@ ADD_EXECUTABLE(test
     src/Pawn.cpp
     src/King.cpp
     src/Timer.cpp
+    src/Game.cpp
     src/Human.cpp
     src/Draw.cpp
     src/Knight.cpp
@@ -46,6 +48,7 @@ ADD_EXECUTABLE(visual_test
     src/Piece.cpp
     src/Pawn.cpp
     src/Timer.cpp
+    src/Game.cpp
     src/Human.cpp
     src/Draw.cpp
 )
@@ -61,6 +64,7 @@ ADD_EXECUTABLE(pawn_visual_test
 	src/Timer.cpp
 	src/Human.cpp
 	src/Draw.cpp
+	src/Game.cpp
         src/King.cpp
         src/Knight.cpp
 )
@@ -74,6 +78,7 @@ ADD_EXECUTABLE(timer_visual_test
     src/Piece.cpp
     src/Pawn.cpp
     src/Timer.cpp
+    src/Game.cpp
     src/Human.cpp
     src/Draw.cpp
 )

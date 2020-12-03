@@ -29,6 +29,9 @@ class Command {
 
             return output;
         }
+
+    Coord getSource() { return source; };
+    Coord getDestination() { return destination; };
 };
 
 #endif
