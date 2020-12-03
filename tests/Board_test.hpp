@@ -60,7 +60,6 @@ TEST(BoardTest, Pieces) {
 
 TEST(BoardTest, Reset) {
     Board &b = Board::get();
-    Coord a (0,1);
     Pawn *p = new Pawn();
     std::vector<Coord> v;
     for (int i = 0; i < 8; ++i)
@@ -82,4 +81,44 @@ TEST(BoardTest, Reset) {
         EXPECT_EQ(b.piece(c), nullptr);
     EXPECT_TRUE(b.highlightedSquares().empty());
     EXPECT_EQ(b.cursor(), Coord(0,0));
+}
+
+TEST(BoardTest, removePiece) {
+    Board &b = Board::get();
+    Pawn *p1 = new Pawn();
+    Pawn *p2 = new Pawn();
+    std::vector<Coord> v;
+    for (int i = 0; i < 8; ++i)
+        for (int j = 0; j < 8; ++j)
+            v.push_back(Coord(i,j));
+
+    Coord c1 = v.back();
+    v.pop_back();
+    Coord c2 = v.back();
+    v.pop_back();
+
+    // place pieces
+    b.placePiece(p1, c1);
+    b.placePiece(p2, c2);
+    EXPECT_EQ(b.piece(c1), p1);
+    EXPECT_EQ(b.piece(c2), p2);
+    for (auto c: v)
+        EXPECT_EQ(b.piece(c), nullptr);
+
+    // remove one piece
+    b.maybeRemovePiece(c2);
+    EXPECT_EQ(b.piece(c1), p1);
+    EXPECT_EQ(b.piece(c2), nullptr);
+    for (auto c: v)
+        EXPECT_EQ(b.piece(c), nullptr);
+}
+
+TEST(BoardTest, isInCheck) {
+    Board &b = Board::get();
+    // TODO
+}
+
+TEST(BoardTest, canMakeMove) {
+    Board &b = Board::get();
+    // TODO
 }
