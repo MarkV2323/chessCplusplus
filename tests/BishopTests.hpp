@@ -102,4 +102,10 @@ TEST(BishopTest, bishopNoMoves) {
     b.clearBoard();
 }
 
+TEST(BishopTest, captureCoord) { // NOLINT(cert-err58-cpp)
+    Bishop p (WHITE, Coord(0,0));
+    Coord d = Coord(1,0);
+    EXPECT_EQ(p.captureCoord(d), d);
+}
+
 #endif //FINALPROJECT_BISHOPTESTS_HPP

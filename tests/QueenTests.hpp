@@ -109,4 +109,11 @@ TEST(QueenTest, noMoves) { // NOLINT(cert-err58-cpp)
     EXPECT_EQ(queen1Moves.size(), 0);
     b.clearBoard();
 }
+
+TEST(QueenTest, captureCoord) { // NOLINT(cert-err58-cpp)
+    Queen p (WHITE, Coord(0,0));
+    Coord d = Coord(1,0);
+    EXPECT_EQ(p.captureCoord(d), d);
+}
+
 #endif //FINALPROJECT_QUEENTESTS_HPP
