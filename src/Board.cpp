@@ -7,6 +7,7 @@
 #include <curses.h>
 #include <iostream>
 #include <assert.h>
+#include <strings.h>
 
 // Graphics
 

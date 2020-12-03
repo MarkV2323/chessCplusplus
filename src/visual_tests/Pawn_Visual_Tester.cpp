@@ -2,6 +2,8 @@
 #include <iostream>
 #include "../../header/Board.hpp"
 #include "../../header/Pawn.hpp"
+#include "../../header/King.hpp"
+#include "../../header/Knight.hpp"
 
 // Pause Function (n to continue)
 inline void wait_key_press() {
@@ -118,9 +120,32 @@ int main() {
     b.clearBoard();
     b.highlightedSquares({});
 
+    // Adds a knight & king to the board w/ display of possibleMoves.
+    auto knight1 = new Knight(WHITE, Coord(3,3));
+    auto king1 = new King(WHITE, Coord(6,6));
+    b.placePiece(knight1, knight1->getLocation());
+    b.placePiece(king1, king1->getLocation());
+    possibleMoves.clear();
+    std::vector<Coord> knight1Moves = knight1->possibleMoves();
+    std::vector<Coord> king1Moves = king1->possibleMoves();
+    possibleMoves.reserve(knight1Moves.size() + king1Moves.size());
+    possibleMoves.insert(possibleMoves.end(), knight1Moves.begin(), knight1Moves.end());
+    possibleMoves.insert(possibleMoves.end(), king1Moves.begin(), king1Moves.end());
+    b.highlightedSquares(possibleMoves);
+
     // updates the board
     b.drawTick();
 
+    // Lets user move cursor on the board.
+    move_cursor(b);
+
+    // clears the board & highlighted squares. (example of what clearing the board completely)
+    b.clearBoard();
+    b.highlightedSquares({});
+
+    // updates the board
+    b.drawTick();
+    
     // Lets user move cursor on the board.
     move_cursor(b);
 
