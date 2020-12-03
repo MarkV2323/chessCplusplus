@@ -22,7 +22,7 @@ public:
     // Virtual Functions from parent
     std::vector<Coord> possibleMoves();
 
-    void capture(Coord dst);
+    Coord captureCoord(Coord dst);
 };
 
 

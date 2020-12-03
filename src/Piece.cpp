@@ -48,6 +48,6 @@ void Piece::updateLocation(int x, int y) {
 
 }
 
-void Piece::capture(Coord dst) {
-    Board::get().maybeRemovePiece(dst);
+Coord Piece::captureCoord(Coord dst) {
+    return dst;
 }

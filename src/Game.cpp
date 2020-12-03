@@ -49,7 +49,7 @@ void Game::move(Command c) {
     Coord s = c.getSource();
     Coord d = c.getDestination();
     Piece *p = b.piece(s);
-    p->capture(d); // remove appropriate enemy pieces from the board
+    b.maybeRemovePiece(p->captureCoord(d)); // remove appropriate enemy pieces from the board
     b.placePiece(nullptr, s); // now move p
     b.placePiece(p, d);
     // }
