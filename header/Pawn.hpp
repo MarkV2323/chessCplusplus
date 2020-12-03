@@ -9,7 +9,7 @@ private:
 public:
     // Constructors
     Pawn() : Piece() { };
-    Pawn(enum enumTeam aTeam, Coord aCoord)
+    Pawn(enum Team aTeam, Coord aCoord)
             : Piece("P", 1, aTeam, aCoord), firstMove(true) { };
 
     // Destructor

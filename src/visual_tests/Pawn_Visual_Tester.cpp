@@ -17,23 +17,23 @@ inline void move_cursor(Board &b) {
         switch (getch()) {
             case KEY_UP:
                 b.moveCursor(UP);
-                b.drawTick();
+                drawTick();
                 continue;
             case KEY_LEFT:
                 b.moveCursor(LEFT);
-                b.drawTick();
+                drawTick();
                 continue;
             case KEY_DOWN:
                 b.moveCursor(DOWN);
-                b.drawTick();
+                drawTick();
                 continue;
             case KEY_RIGHT:
                 b.moveCursor(RIGHT);
-                b.drawTick();
+                drawTick();
                 continue;
             case 'x':
                 online_loop = false;
-                b.drawTick();
+                drawTick();
                 break;
             default:
                 // Nothing happens if no arrow keys are pressed.
@@ -49,7 +49,7 @@ int main() {
 
     // Init and build chess board.
     Board &b = Board::get();
-    b.initNCurses();
+    initNCurses();
 
     // Places a black pawn on the board.
     Pawn *p1 = new Pawn(BLACK, Coord(1,1));
@@ -109,7 +109,7 @@ int main() {
     b.highlightedSquares(possibleMoves);
 
     // Updates and draws board.
-    b.drawTick();
+    drawTick();
 
     // Lets user move cursor on the board.
     move_cursor(b);
@@ -119,7 +119,7 @@ int main() {
     b.highlightedSquares({});
 
     // updates the board
-    b.drawTick();
+    drawTick();
 
     // Lets user move cursor on the board.
     move_cursor(b);

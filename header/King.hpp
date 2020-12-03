@@ -8,7 +8,7 @@ private:
 public:
     // Constructors
     King() : Piece() { };
-    King(enum enumTeam aTeam, Coord aCoord)
+    King(enum Team aTeam, Coord aCoord)
             : Piece("K", 100, aTeam, aCoord){ };
 
     // Destructor

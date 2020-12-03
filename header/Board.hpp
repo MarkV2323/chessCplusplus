@@ -1,13 +1,15 @@
 #ifndef __BOARD_H__
 #define __BOARD_H__
 
-#include "../header/Coord.hpp"
-#include "../header/Piece.hpp"
+#include "Coord.hpp"
+#include "Draw.hpp"
+#include "Piece.hpp"
+#include "Player.hpp"
+#include "Timer.hpp"
 
 #include <vector>
 
 enum Direction {UP, DOWN, LEFT, RIGHT};
-enum BorderType { NONE, CURSOR, HIGHLIGHTED };
 
 class Board {
 private:
@@ -19,7 +21,7 @@ private:
     void drawSquare(const Coord &c, enum BorderType border);
     void drawCursor();
     void eraseCursor();
-    Board() {};
+    Board() = default;
 
 public:
     Board(const Board&) = delete;
