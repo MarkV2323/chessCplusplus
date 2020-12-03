@@ -25,6 +25,7 @@ ADD_EXECUTABLE(test
     src/Pawn.cpp
     src/King.cpp
     src/Knight.cpp
+    src/Rook.cpp
 )
 
 ADD_EXECUTABLE(visual_test
