@@ -19,7 +19,7 @@ inline bool inBounds(Coord testCoord) {
 
 // in-line function for checking basic principals of available moves
 // (null ptr, friendly piece, out of bounds)
-inline bool basicCheck(Coord testCoord, Board &board, enumTeam team) {
+inline bool basicCheck(Coord testCoord, Board &board, Team team) {
     if (inBounds(testCoord)) {
         Piece *p = board.piece(testCoord);
         return (p == nullptr) || (p->getTeam() != team);
@@ -32,7 +32,7 @@ std::vector<Coord> Rook::possibleMoves() {
     // vector to return.
     std::vector<Coord> possibleMoves;
     Board &board = Board::get();
-    enumTeam team = getTeam();
+    Team team = getTeam();
     Coord currentLocation = this->getLocation();
     Coord testLocation = currentLocation;
 

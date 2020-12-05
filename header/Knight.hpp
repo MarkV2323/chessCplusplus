@@ -7,7 +7,7 @@ private:
 public:
     // Constructors
     Knight() : Piece() { };
-    Knight(enum enumTeam aTeam, Coord aCoord)
+    Knight(enum Team aTeam, Coord aCoord)
             : Piece("Kn", 10, aTeam, aCoord){ };
 
     // Destructor

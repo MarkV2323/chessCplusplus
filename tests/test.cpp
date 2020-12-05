@@ -8,6 +8,12 @@
 #include "RookTests.hpp"
 #include "BishopTests.hpp"
 #include "QueenTests.hpp"
+#include "Game_test.hpp"
+#include "Human_test.hpp"
+
+// keep this one included last since it pauses the test for over a
+// second to see that timer is functioning properly
+#include "Timer_test.hpp"
 
 int main(int argc, char **argv) {
   ::testing::InitGoogleTest(&argc, argv);

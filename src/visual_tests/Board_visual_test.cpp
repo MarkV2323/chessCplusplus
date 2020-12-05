@@ -11,7 +11,7 @@ inline void wait_key_press() {
 
 int main() {
     Board &b = Board::get();
-    b.initNCurses();
+    initNCurses();
     Coord c (1,0);
     Pawn *p = new Pawn(WHITE, c);
     b.placePiece(p, c);
@@ -26,53 +26,53 @@ int main() {
     b.highlightedSquares(hs);
 
     // move cursor over various elements
-    b.drawTick();
+    drawTick();
     wait_key_press();
     b.moveCursor(RIGHT);
-    b.drawTick();
+    drawTick();
     wait_key_press();
     b.moveCursor(RIGHT);
-    b.drawTick();
+    drawTick();
     wait_key_press();
     b.moveCursor(RIGHT);
-    b.drawTick();
+    drawTick();
     wait_key_press();
     b.moveCursor(RIGHT);
-    b.drawTick();
+    drawTick();
     wait_key_press();
 
     // move piece over various elements
     b.placePiece(nullptr, c);
     c.addWrapped(Coord(1,0));
     b.placePiece(p, c);
-    b.drawTick();
+    drawTick();
     wait_key_press();
     b.placePiece(nullptr, c2);
     c2.addWrapped(Coord(1,0));
     b.placePiece(p2, c2);
-    b.drawTick();
+    drawTick();
     wait_key_press();
 
     b.placePiece(nullptr, c);
     c.addWrapped(Coord(1,0));
     b.placePiece(p, c);
-    b.drawTick();
+    drawTick();
     wait_key_press();
     b.placePiece(nullptr, c2);
     c2.addWrapped(Coord(1,0));
     b.placePiece(p2, c2);
-    b.drawTick();
+    drawTick();
     wait_key_press();
 
     b.placePiece(nullptr, c);
     c.addWrapped(Coord(1,0));
     b.placePiece(p, c);
-    b.drawTick();
+    drawTick();
     wait_key_press();
     b.placePiece(nullptr, c2);
     c2.addWrapped(Coord(1,0));
     b.placePiece(p2, c2);
-    b.drawTick();
+    drawTick();
     wait_key_press();
 
     b.placePiece(nullptr, c);
@@ -81,7 +81,7 @@ int main() {
     b.placePiece(nullptr, c2);
     c2.addWrapped(Coord(1,0));
     b.placePiece(p2, c2);
-    b.drawTick();
+    drawTick();
     wait_key_press();
 
     b.reset();

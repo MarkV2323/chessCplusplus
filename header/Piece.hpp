@@ -3,6 +3,7 @@
 #include <string>
 #include <vector>
 #include "Coord.hpp"
+#include "global.h"
 
 // Interface for Chess Pieces
 /*
@@ -19,20 +20,17 @@
  * It is planned to return an vector with possible valid moves (coordinates) for the chess piece.
  */
 
-// Define Enum
-enum enumTeam {WHITE, BLACK};
-
 class Piece {
 private:
     std::string symbol;
     int value;
-    enum enumTeam team;
+    enum Team team;
     Coord currentLocation;
 
 public:
     // Constructor
     Piece() : symbol(" "), value(0), team(BLACK), currentLocation(Coord(0,0)) { }; // DEFAULTS
-    Piece(std::string aSymbol, int aValue, enum enumTeam aTeam, Coord aCoord);
+    Piece(std::string aSymbol, int aValue, enum Team aTeam, Coord aCoord);
 
     // Destructor
     virtual ~Piece();
@@ -40,7 +38,7 @@ public:
     // Non Virtual Functions
     int getValue() const;
     std::string getSymbol();
-    enum enumTeam getTeam();
+    enum Team getTeam();
     Coord getLocation();
     void updateLocation(int x, int y);
 

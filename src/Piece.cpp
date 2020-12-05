@@ -2,7 +2,7 @@
 #include <stdexcept>
 
 // Constructor
-Piece::Piece(std::string aSymbol, int aValue, enum enumTeam aTeam, Coord aCoord) : currentLocation(0,0) {
+Piece::Piece(std::string aSymbol, int aValue, enum Team aTeam, Coord aCoord) : currentLocation(0,0) {
     this->symbol = std::move(aSymbol);
     this->value = aValue;
     this->team = aTeam;
@@ -27,7 +27,7 @@ int Piece::getValue() const {
     return this->value;
 }
 
-enum enumTeam Piece::getTeam() {
+enum Team Piece::getTeam() {
     return this->team;
 }
 

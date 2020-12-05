@@ -55,7 +55,7 @@ std::vector<Coord> Pawn::possibleMoves() {
     Coord testLocation = this->getLocation();
 
     // Gets the team membership of this pawn.
-    enumTeam testTeam = getTeam();
+    Team testTeam = getTeam();
 
     // North side: (0, 1) to (7, 1) team black.
     // South side: (0, 6) to (7, 6) team white.

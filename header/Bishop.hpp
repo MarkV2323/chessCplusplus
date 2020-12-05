@@ -8,7 +8,7 @@ private:
 public:
     // Constructors
     Bishop() : Piece() { };
-    Bishop(enum enumTeam aTeam, Coord aCoord)
+    Bishop(enum Team aTeam, Coord aCoord)
             : Piece("B", 25, aTeam, aCoord){ };
 
     // Destructor

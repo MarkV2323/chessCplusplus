@@ -8,7 +8,7 @@ private:
 public:
     // Constructors
     Rook() : Piece() { };
-    Rook(enum enumTeam aTeam, Coord aCoord)
+    Rook(enum Team aTeam, Coord aCoord)
             : Piece("R", 25, aTeam, aCoord){ };
 
     // Destructor

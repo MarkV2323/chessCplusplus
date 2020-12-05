@@ -8,7 +8,7 @@ private:
 public:
     // Constructors
     Queen() : Piece() { };
-    Queen(enum enumTeam aTeam, Coord aCoord)
+    Queen(enum Team aTeam, Coord aCoord)
             : Piece("Q", 50, aTeam, aCoord){ };
 
     // Destructor
