@@ -1,4 +1,5 @@
 #include "../header/global.h"
+#include "../header/Board.hpp"
 #include "../header/Draw.hpp"
 #include "../header/Game.hpp"
 
@@ -129,7 +130,8 @@ void initNCurses() {
             newwin(SQUAREH, SQUAREW, i/NUM_SQUARES*SQUAREH, i%NUM_SQUARES*SQUAREW);
         wbkgd(wsquares[i], COLOR_PAIR((i+i/NUM_SQUARES)%2 + 1));
     }
-    //drawCursor(); TODO
+    // cursor needs to be drawn in its initial position
+    drawSquare(nullptr, Board::get().cursor(), CURSOR);
     refreshAllSquares();
 
     initializeGameInfo();

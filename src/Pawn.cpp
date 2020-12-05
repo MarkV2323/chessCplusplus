@@ -155,3 +155,9 @@ std::vector<Coord> Pawn::possibleMoves() {
     return possibleMoves;
 
 }
+
+Coord Pawn::captureCoord(Coord dst) {
+    // TODO: check if capturing en passant instead of always capturing
+    // normally
+    return Piece::captureCoord(dst);
+}

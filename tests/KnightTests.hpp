@@ -103,4 +103,10 @@ TEST(KnightTest, knightNoMoves) { // NOLINT(cert-err58-cpp)
     EXPECT_EQ(knight1Moves.size(), 0);
 }
 
+TEST(KnightTest, captureCoord) { // NOLINT(cert-err58-cpp)
+    Knight p (WHITE, Coord(0,0));
+    Coord d = Coord(1,0);
+    EXPECT_EQ(p.captureCoord(d), d);
+}
+
 #endif //FINALPROJECT_KNIGHTTESTS_HPP

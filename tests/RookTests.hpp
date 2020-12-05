@@ -162,4 +162,10 @@ TEST(RookTest, rookNoMoves) { // NOLINT(cert-err58-cpp)
     EXPECT_EQ(rook1Moves.size(), 0);
 }
 
+TEST(RookTest, captureCoord) { // NOLINT(cert-err58-cpp)
+    Rook p (WHITE, Coord(0,0));
+    Coord d = Coord(1,0);
+    EXPECT_EQ(p.captureCoord(d), d);
+}
+
 #endif //FINALPROJECT_ROOKTESTS_HPP

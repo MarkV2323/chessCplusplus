@@ -1,3 +1,4 @@
+#include "../header/Board.hpp"
 #include "../header/Piece.hpp"
 #include <stdexcept>
 
@@ -45,4 +46,8 @@ void Piece::updateLocation(int x, int y) {
         throw std::invalid_argument("Invalid Coordinate Parameter!");
     }
 
+}
+
+Coord Piece::captureCoord(Coord dst) {
+    return dst;
 }

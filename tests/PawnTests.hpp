@@ -146,4 +146,9 @@ TEST(PawnTest, pawnMovesNoMoves) { // NOLINT(cert-err58-cpp)
     b.clearBoard();
 }
 
+TEST(PawnTest, captureCoord) { // NOLINT(cert-err58-cpp)
+    // TODO
+}
+
+
 #endif //FINALPROJECT_PAWNTESTS_HPP

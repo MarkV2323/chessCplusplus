@@ -45,6 +45,10 @@ public:
     // Virtual Functions
     virtual std::vector<Coord> possibleMoves() = 0;
 
+    // Returns coord of piece that should be captured (if there is one
+    // there) when moving to dst. For most pieces this is simply DST
+    // so the default behavior of this function is to just return dst.
+    virtual Coord captureCoord(Coord dst);
 };
 
 

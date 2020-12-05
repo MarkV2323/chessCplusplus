@@ -1,13 +1,15 @@
-#include "../header/Pawn.hpp"
-#include <iostream>
-using namespace std;
-// Main Method
+#include "../header/global.h"
+#include "../header/Board.hpp"
+#include "../header/Draw.hpp"
+#include "../header/Game.hpp"
+#include "../header/Human.hpp"
+
 int main() {
-    Pawn* pawn = new Pawn(WHITE, Coord(2, 3));
-
-    // prints sum info on pawn
-    cout << "Symbol: " << pawn->getSymbol() << "  Value: " << pawn->getValue()
-    << "  Team: " << pawn->getTeam() << "  Current Location: (" << pawn->getLocation().x
-    << "," << pawn->getLocation().y << ") \n";
-
+    Human p1 (WHITE);
+    Human p2 (BLACK);
+    Game g (p1, p2, 5);
+    initNCurses();
+    g.runGame();
+    cleanupNCurses();
+    return 0;
 }

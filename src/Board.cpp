@@ -85,14 +85,40 @@ Board& Board::get() {
     return board;
 }
 
-void Board::placePiece(Piece *p, Coord loc) {
-    if (p != nullptr) {
-        p->updateLocation(loc.x, loc.y);
-    }
-    board[loc.y][loc.x] = p;
-    drawPiece(p, loc);
+Piece** Board::pieceSlot(Coord c) {
+    return &(board[c.y][c.x]);
 }
 
-Piece* Board::piece(Coord loc) {
-    return board[loc.y][loc.x];
+Piece* Board::piece(Coord c) {
+    return *pieceSlot(c);
+}
+
+void Board::maybeRemovePiece(Coord c) {
+    Piece **p = pieceSlot(c);
+    if (*p) {
+        delete *p;
+        *p = nullptr;
+    }
+    drawPiece(nullptr, c);
+}
+
+void Board::placePiece(Piece *p, Coord c) {
+    Piece **slot = pieceSlot(c);
+    if (p != nullptr) {
+        p->updateLocation(c.x, c.y);
+    }
+    *slot = p;
+    drawPiece(p, c);
+}
+
+bool Board::isInCheck(enum Team team) {
+    // TODO: find TEAM's king on the board, check if he is in one of
+    // the other team's pieces possibleMoves
+    return false;
+}
+
+bool Board::canMakeMove(enum Team team) {
+    // TODO: go through all of TEAM's pieces on the board, check if
+    // any of them return a nonempty possibleMoves    
+    return true;
 }
