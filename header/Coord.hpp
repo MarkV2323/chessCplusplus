@@ -11,6 +11,8 @@ public:
     // add where reaching 8 wraps back around to 0
     void addWrapped(const Coord &c);
 
+    bool isInBounds();
+
     Coord& operator=(const Coord& arg) noexcept = default;
     Coord& operator+=(const Coord& arg);
     Coord operator+(const Coord& rhs) const;

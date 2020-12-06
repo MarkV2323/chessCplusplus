@@ -14,7 +14,7 @@ enum Direction {UP, DOWN, LEFT, RIGHT};
 class Board {
 private:
     // These are private so that Board can properly update graphics when they change
-    Piece *board[8][8] = {nullptr};
+    Piece *board[8][8] = {{nullptr}};
     Coord cursor_ = Coord(0, 0);
     std::vector<Coord> highlightedSquares_;
     Piece *whiteKing;
