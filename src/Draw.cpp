@@ -14,6 +14,8 @@ static bool isBlackSquare(const Coord &c) {
 #define SQUAREW 5
 #define SQUAREH 3
 
+#ifndef NO_GRAPHICS
+
 static WINDOW *wsquares[NUM_SQUARES * NUM_SQUARES] = {nullptr};
 // window where timers and current player's turn are drawn
 static WINDOW* gameinfo = nullptr;
@@ -48,12 +50,15 @@ static void refreshAllSquares() {
     doupdate();
 }
 
+#endif // NO_GRAPHICS
+
 void eraseBorder(const Coord &c) {
 #ifndef NO_GRAPHICS
     wborder(getSquare(c), ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ');
 #endif
 }
 
+#ifndef NO_GRAPHICS
 // Don't call this function directly, call drawSquare to ensure that
 // that the Piece's color at this location is not messed up
 static void drawBorder(const Coord &c, bool isCursor) {
@@ -73,6 +78,7 @@ static void drawBorder(const Coord &c, bool isCursor) {
         box(w, '|', '-');
     }
 }
+#endif // NO_GRAPHICS
 
 void drawPiece(Piece *p, Coord loc) {
 #ifndef NO_GRAPHICS
