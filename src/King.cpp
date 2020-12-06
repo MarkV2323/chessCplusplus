@@ -3,24 +3,10 @@
 #include <vector>
 #include <iostream>
 
-// in-line function for checking bounds on testLocations.
-inline bool inBounds(Coord testCoord) {
-    // Checks X
-    if (testCoord.x < 0 || testCoord.x > 7) {
-        return false;
-    }
-    // Checks Y
-    if (testCoord.y < 0 || testCoord.y > 7) {
-        return false;
-    }
-    // testCoord is within the bounds.
-    return true;
-}
-
 // in-line function for checking basic principals of available moves
 // (null ptr, friendly piece, out of bounds)
 inline bool basicCheck(Coord testCoord, Board &board, Team team) {
-    if (inBounds(testCoord)) {
+    if (testCoord.isInBounds()) {
         Piece *p = board.piece(testCoord);
         return (p == nullptr) || (p->getTeam() != team);
     }
