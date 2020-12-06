@@ -18,6 +18,10 @@ void Coord::addWrapped(const Coord &c) {
     if (y < 0) y = 8+y;
 }
 
+bool Coord::isInBounds() {
+    return (x >= 0) && (y >= 0) && (x < 8) && (y < 8);
+}
+
 Coord& Coord::operator+=(const Coord& rhs) {
     this->add(rhs);
     return *this;
