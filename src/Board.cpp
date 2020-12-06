@@ -29,6 +29,11 @@ void Board::drawCursor() {
     drawSquare(cursor_, CURSOR);
 }
 
+// Iterator
+
+Board::iterator Board::begin() { return (Piece**) board; }
+Board::iterator Board::end() { return ((Piece**) board) + (8*8+1); }
+
 // Board
 
 void Board::reset() {
@@ -111,9 +116,25 @@ void Board::placePiece(Piece *p, Coord c) {
     drawPiece(p, c);
 }
 
+void Board::setKings(Piece *whiteKing, Piece *blackKing) {
+    this->whiteKing = whiteKing;
+    this->blackKing = blackKing;
+}
+
 bool Board::isInCheck(enum Team team) {
-    // TODO: find TEAM's king on the board, check if he is in one of
-    // the other team's pieces possibleMoves
+    assert(whiteKing);
+    assert(blackKing);
+    Coord kingCoord = (team == WHITE) ? whiteKing->getLocation() : blackKing->getLocation();
+    for (auto pslot: *this) {
+        if (pslot && (pslot->getTeam() != team)) {
+            vector<Coord> dangerousSquares = pslot->possibleMoves();
+            if (std::find(dangerousSquares.begin(),
+                          dangerousSquares.end(),
+                          kingCoord)
+                != dangerousSquares.end())
+                return true;
+        }
+    }
     return false;
 }
 

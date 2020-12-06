@@ -1,8 +1,10 @@
 #include "gtest/gtest.h"
 
-#include "../header/Coord.hpp"
 #include "../header/Board.hpp"
+#include "../header/Coord.hpp"
+#include "../header/King.hpp"
 #include "../header/Pawn.hpp"
+#include "../header/Rook.hpp"
 
 TEST(BoardTest, Cursor) {
     Board &b = Board::get();
@@ -115,7 +117,16 @@ TEST(BoardTest, removePiece) {
 
 TEST(BoardTest, isInCheck) {
     Board &b = Board::get();
-    // TODO
+    Coord c (0,0);
+    King *wk = new King(WHITE, c);
+    King *bk = new King(BLACK, c);
+    Rook *wr = new Rook(WHITE, c);
+    b.setKings(wk, bk);
+    b.placePiece(wk, Coord(0,0));
+    b.placePiece(bk, Coord(7,7));
+    b.placePiece(wr, Coord(0,7));
+    EXPECT_FALSE(b.isInCheck(WHITE));
+    EXPECT_TRUE(b.isInCheck(BLACK));
 }
 
 TEST(BoardTest, canMakeMove) {
