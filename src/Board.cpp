@@ -5,6 +5,7 @@
 
 #include <algorithm>
 #include <array>
+#include <cassert>
 #include <iostream>
 
 #include <strings.h>
@@ -67,6 +68,10 @@ Coord Board::cursor() {
 }
 
 void Board::highlightedSquares(std::vector<Coord> v) {
+    // validate coordinates of each coord
+    for (auto c: highlightedSquares_)
+        assert(c.isInBounds());
+
     for (auto c: highlightedSquares_)
         eraseBorder(c);
     highlightedSquares_ = std::move(v);
@@ -86,11 +91,14 @@ Board& Board::get() {
 }
 
 Piece** Board::pieceSlot(Coord c) {
+    assert(c.isInBounds());
     return &(board[c.y][c.x]);
 }
 
 Piece* Board::piece(Coord c) {
-    return *pieceSlot(c);
+    Piece *p = *pieceSlot(c);
+    assert((!p) || (p->getLocation() == c));
+    return p;
 }
 
 void Board::maybeRemovePiece(Coord c) {

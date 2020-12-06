@@ -3,24 +3,10 @@
 #include <vector>
 #include <iostream>
 
-// in-line function for checking bounds on testLocations.
-inline bool inBounds(Coord testCoord) {
-    // Checks X
-    if (testCoord.x < 0 || testCoord.x > 7) {
-        return false;
-    }
-    // Checks Y
-    if (testCoord.y < 0 || testCoord.y > 7) {
-        return false;
-    }
-    // testCoord is within the bounds.
-    return true;
-}
-
 // in-line function for checking basic principals of available moves
 // (null ptr, friendly piece, out of bounds)
 inline bool basicCheck(Coord testCoord, Board &board, Team team) {
-    if (inBounds(testCoord)) {
+    if (testCoord.isInBounds()) {
         Piece *p = board.piece(testCoord);
         return (p == nullptr) || (p->getTeam() != team);
     }
@@ -40,7 +26,7 @@ std::vector<Coord> Rook::possibleMoves() {
     for (int i = 0; i < currentLocation.y; i++) {
         testLocation.add(Coord(0,-1));
         // Checks if in bounds.
-        if (inBounds(testLocation)) {
+        if (testLocation.isInBounds()) {
             // checks if piece is in the way (if it is, must stop here.)
             if (board.piece(testLocation) != nullptr) {
                 if (board.piece(testLocation)->getTeam() == team) {
@@ -67,7 +53,7 @@ std::vector<Coord> Rook::possibleMoves() {
     for (int i = 0; i < 7 - currentLocation.x; i++) {
         testLocation.add(Coord(1,0));
         // Checks if in bounds.
-        if (inBounds(testLocation)) {
+        if (testLocation.isInBounds()) {
             // checks if piece is in the way (if it is, must stop here.)
             if (board.piece(testLocation) != nullptr) {
                 if (board.piece(testLocation)->getTeam() == team) {
@@ -94,7 +80,7 @@ std::vector<Coord> Rook::possibleMoves() {
     for (int i = 0; i < 7 - currentLocation.y; i++) {
         testLocation.add(Coord(0,1));
         // Checks if in bounds.
-        if (inBounds(testLocation)) {
+        if (testLocation.isInBounds()) {
             // checks if piece is in the way (if it is, must stop here.)
             if (board.piece(testLocation) != nullptr) {
                 if (board.piece(testLocation)->getTeam() == team) {
@@ -121,7 +107,7 @@ std::vector<Coord> Rook::possibleMoves() {
     for (int i = 0; i < currentLocation.x; i++) {
         testLocation.add(Coord(-1,0));
         // Checks if in bounds.
-        if (inBounds(testLocation)) {
+        if (testLocation.isInBounds()) {
             // checks if piece is in the way (if it is, must stop here.)
             if (board.piece(testLocation) != nullptr) {
                 if (board.piece(testLocation)->getTeam() == team) {
