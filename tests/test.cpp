@@ -8,6 +8,7 @@
 #include "RookTests.hpp"
 #include "BishopTests.hpp"
 #include "QueenTests.hpp"
+#include "PieceTests.hpp"
 #include "Game_test.hpp"
 #include "Human_test.hpp"
 

@@ -49,6 +49,10 @@ public:
     // there) when moving to dst. For most pieces this is simply DST
     // so the default behavior of this function is to just return dst.
     virtual Coord captureCoord(Coord dst);
+
+    // Returns true if moving this piece to DST would put this piece's
+    // own team in checkmate
+    bool moveWouldCauseCheckmate(Coord dst);
 };
 
 
