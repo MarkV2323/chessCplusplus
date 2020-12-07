@@ -4,6 +4,8 @@
 #include "../header/Pawn.hpp"
 #include "../header/Coord.hpp"
 
+#include <algorithm>
+
 // Tests if a new King can be created successfully.
 TEST(KingTest, createNewKing) { // NOLINT(cert-err58-cpp)
     King* king1 = new King(WHITE, Coord(2, 3));

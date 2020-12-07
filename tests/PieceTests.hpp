@@ -7,6 +7,8 @@
 #include "../header/King.hpp"
 #include "../header/Rook.hpp"
 
+#include <algorithm>
+
 TEST(PieceTest, MoveWouldCauseCheckmate) {
     Board &b = Board::get();
     King* wk = new King(WHITE, Coord(7, 7));
