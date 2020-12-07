@@ -3,15 +3,15 @@
 #include <vector>
 #include <iostream>
 
-// in-line function for checking basic principals of available moves
-// (null ptr, friendly piece, out of bounds)
-inline bool basicCheck(Coord testCoord, Board &board, Team team) {
-    if (testCoord.isInBounds()) {
-        Piece *p = board.piece(testCoord);
-        return (p == nullptr) || (p->getTeam() != team);
-    }
-    return false;
-}
+// // in-line function for checking basic principals of available moves
+// // (null ptr, friendly piece, out of bounds)
+// inline bool moveIsValid(Coord testCoord) {
+//     if (testCoord.isInBounds()) {
+//         Piece *p = board.piece(testCoord);
+//         return (p == nullptr) || (p->getTeam() != team);
+//     }
+//     return false;
+// }
 
 std::vector<Coord> King::possibleMoves() {
 
@@ -25,7 +25,7 @@ std::vector<Coord> King::possibleMoves() {
     // checks north.
     for (int i = -1; i < 2; i++) {
         testLocation.add(Coord(i, -1));
-        if (basicCheck(testLocation, board, team)) {
+        if (moveIsValid(testLocation)) {
             possibleMoves.push_back(testLocation);
         }
         testLocation = currentLocation;
@@ -34,7 +34,7 @@ std::vector<Coord> King::possibleMoves() {
     // checks center.
     for (int i = -1; i < 2; i+=2) {
         testLocation.add(Coord(i, 0));
-        if (basicCheck(testLocation, board, team)) {
+        if (moveIsValid(testLocation)) {
             possibleMoves.push_back(testLocation);
         }
         testLocation = currentLocation;
@@ -43,7 +43,7 @@ std::vector<Coord> King::possibleMoves() {
     // checks south.
     for (int i = -1; i < 2; i++) {
         testLocation.add(Coord(i, 1));
-        if (basicCheck(testLocation, board, team)) {
+        if (moveIsValid(testLocation)) {
             possibleMoves.push_back(testLocation);
         }
         testLocation = currentLocation;
@@ -58,3 +58,4 @@ std::vector<Coord> King::possibleMoves() {
     return possibleMoves;
 
 }
+

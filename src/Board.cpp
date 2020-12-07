@@ -30,6 +30,11 @@ void Board::drawCursor() {
     drawSquare(cursor_, CURSOR);
 }
 
+// Iterator
+
+Board::iterator Board::begin() { return (Piece**) board; }
+Board::iterator Board::end() { return ((Piece**) board) + (8*8+1); }
+
 // Board
 
 void Board::reset() {
@@ -119,14 +124,39 @@ void Board::placePiece(Piece *p, Coord c) {
     drawPiece(p, c);
 }
 
+void Board::setKings(Piece *whiteKing, Piece *blackKing) {
+    this->whiteKing = whiteKing;
+    this->blackKing = blackKing;
+}
+
+static bool toplevel = true;
+
 bool Board::isInCheck(enum Team team) {
-    // TODO: find TEAM's king on the board, check if he is in one of
-    // the other team's pieces possibleMoves
+    // hacky way to determine if possibleMoves should check for
+    // isInCheck. We let it check anyways but any nested call to
+    // isInCheck will just return false.
+    if (toplevel && whiteKing && blackKing) {
+        toplevel = false;
+        Coord kingCoord = (team == WHITE) ? whiteKing->getLocation() : blackKing->getLocation();
+        for (auto pslot: *this) {
+            if (pslot && (pslot->getTeam() != team)) {
+                vector<Coord> dangerousSquares = pslot->possibleMoves();
+                if (std::find(dangerousSquares.begin(),
+                              dangerousSquares.end(),
+                              kingCoord)
+                    != dangerousSquares.end()) {
+                    toplevel = true;
+                    return true;
+                }
+            }
+        }
+        toplevel = true;
+    }
     return false;
 }
 
 bool Board::canMakeMove(enum Team team) {
     // TODO: go through all of TEAM's pieces on the board, check if
-    // any of them return a nonempty possibleMoves    
+    // any of them return a nonempty possibleMoves
     return true;
 }

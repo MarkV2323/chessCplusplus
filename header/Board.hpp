@@ -17,12 +17,20 @@ private:
     Piece *board[8][8] = {{nullptr}};
     Coord cursor_ = Coord(0, 0);
     std::vector<Coord> highlightedSquares_;
+    Piece *whiteKing = nullptr;
+    Piece *blackKing = nullptr;
 
     void drawSquare(const Coord &c, enum BorderType border);
     void drawCursor();
     void eraseCursor();
 
     Piece** pieceSlot(Coord);
+
+    typedef Piece** iterator;
+    typedef Piece** const_iterator;
+    iterator begin();
+    iterator end();
+
     Board() = default;
 
 public:
@@ -57,6 +65,9 @@ public:
     void placePiece(Piece* p, Coord loc);
     Piece* piece(Coord loc);
 
+    // This must be called to let Board know where the kings are
+    // before isInCheck will work
+    void setKings(Piece *whiteKing, Piece *blackKing);
     bool isInCheck(enum Team team);
     bool canMakeMove(enum Team team);
 

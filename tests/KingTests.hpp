@@ -4,6 +4,8 @@
 #include "../header/Pawn.hpp"
 #include "../header/Coord.hpp"
 
+#include <algorithm>
+
 // Tests if a new King can be created successfully.
 TEST(KingTest, createNewKing) { // NOLINT(cert-err58-cpp)
     King* king1 = new King(WHITE, Coord(2, 3));
@@ -164,6 +166,22 @@ TEST(KingTest, captureCoord) { // NOLINT(cert-err58-cpp)
     King p (WHITE, Coord(0,0));
     Coord d = Coord(1,0);
     EXPECT_EQ(p.captureCoord(d), d);
+}
+
+// test that king can't move itself into check
+TEST(KingTest, moveSelfIntoCheck) { // NOLINT(cert-err58-cpp)
+    Board &b = Board::get();
+    King *wk = new King(WHITE, Coord(0,0));
+    King *bk = new King(BLACK, Coord(2,0));
+    b.placePiece(wk, wk->getLocation());
+    b.placePiece(bk, bk->getLocation());
+    b.setKings(wk, bk);
+    vector<Coord> moves = wk->possibleMoves();
+    EXPECT_TRUE(std::find(moves.begin(), moves.end(), Coord(1,0)) == moves.end());
+    EXPECT_TRUE(std::find(moves.begin(), moves.end(), Coord(1,1)) == moves.end());
+    EXPECT_FALSE(std::find(moves.begin(), moves.end(), Coord(0,1)) == moves.end());
+    EXPECT_EQ(moves.size(), 1);
+    b.clearBoard();
 }
 
 #endif //FINALPROJECT_KINGTESTS_HPP

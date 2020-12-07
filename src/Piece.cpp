@@ -48,6 +48,41 @@ void Piece::updateLocation(int x, int y) {
 
 }
 
-Coord Piece::captureCoord(Coord dst) {
-    return dst;
+Coord Piece::captureCoord(Coord dst) { return dst; }
+
+bool Piece::moveWouldCauseCheckmate(Coord dst) {
+    Board &b = Board::get();
+    Coord src = this->getLocation();
+    Coord capture = this->captureCoord(dst);
+    Piece *captured = b.piece(capture);
+    // simulate move
+    b.placePiece(nullptr, capture);
+    b.placePiece(nullptr, src);
+    b.placePiece(this, dst);
+    bool wouldCheckmate = b.isInCheck(this->getTeam());
+    // reverse move
+    b.placePiece(nullptr, dst);
+    b.placePiece(captured, capture);
+    b.placePiece(this, src);
+
+    return wouldCheckmate;
+}
+
+bool Piece::moveIsValid(Coord dst) {
+    Board &b = Board::get();
+    if (dst.isInBounds()) {
+        Piece *p = b.piece(dst);
+        return ((p == nullptr) || (p->getTeam() != team)) && !this->moveWouldCauseCheckmate(dst);
+    }
+    return false;
+}
+
+void Piece::tryMovesOnRay(vector<Coord> &result, Coord increment) {
+    Board &b = Board::get();
+    Coord c = getLocation();
+    do {
+        c.add(increment);
+        if (moveIsValid(c))
+            result.push_back(c);
+    } while (c.isInBounds() && !b.piece(c));
 }
