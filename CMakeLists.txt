@@ -20,6 +20,7 @@ ADD_EXECUTABLE(chess
     src/Rook.cpp
     src/Bishop.cpp
     src/Queen.cpp
+    src/Idiot.cpp
 )
 
 TARGET_LINK_LIBRARIES(chess ncurses)
@@ -31,14 +32,14 @@ ADD_EXECUTABLE(test
     src/Piece.cpp
     src/Pawn.cpp
     src/King.cpp
-    src/Timer.cpp
-    src/Game.cpp
-    src/Human.cpp
-    src/Draw.cpp
     src/Knight.cpp
     src/Rook.cpp
     src/Bishop.cpp
     src/Queen.cpp
+    src/Timer.cpp
+    src/Game.cpp
+    src/Human.cpp
+    src/Draw.cpp
 )
 
 ADD_EXECUTABLE(visual_test
@@ -47,6 +48,11 @@ ADD_EXECUTABLE(visual_test
     src/Board.cpp
     src/Piece.cpp
     src/Pawn.cpp
+    src/King.cpp
+    src/Knight.cpp
+    src/Rook.cpp
+    src/Bishop.cpp
+    src/Queen.cpp
     src/Timer.cpp
     src/Game.cpp
     src/Human.cpp
@@ -56,17 +62,20 @@ ADD_EXECUTABLE(visual_test
 TARGET_LINK_LIBRARIES(visual_test ncurses)
 
 ADD_EXECUTABLE(pawn_visual_test
-	src/visual_tests/Pawn_Visual_Tester.cpp
-	src/Coord.cpp
-	src/Board.cpp
-	src/Piece.cpp
-	src/Pawn.cpp
-	src/Timer.cpp
-	src/Human.cpp
-	src/Draw.cpp
-	src/Game.cpp
-        src/King.cpp
-        src/Knight.cpp
+    src/visual_tests/Pawn_Visual_Tester.cpp
+    src/Coord.cpp
+    src/Board.cpp
+    src/Piece.cpp
+    src/Pawn.cpp
+    src/King.cpp
+    src/Knight.cpp
+    src/Rook.cpp
+    src/Bishop.cpp
+    src/Queen.cpp
+    src/Timer.cpp
+    src/Human.cpp
+    src/Draw.cpp
+    src/Game.cpp
 )
 
 TARGET_LINK_LIBRARIES(pawn_visual_test ncurses)
@@ -77,6 +86,11 @@ ADD_EXECUTABLE(timer_visual_test
     src/Board.cpp
     src/Piece.cpp
     src/Pawn.cpp
+    src/King.cpp
+    src/Knight.cpp
+    src/Rook.cpp
+    src/Bishop.cpp
+    src/Queen.cpp
     src/Timer.cpp
     src/Game.cpp
     src/Human.cpp

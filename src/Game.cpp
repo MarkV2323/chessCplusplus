@@ -78,7 +78,7 @@ void Game::runGame() {
 }
 
 void Game::tick() {
-    getCurrentPlayer().tick();
+    getCurrentPlayer().tick(*this);
     getCurrentTimer().tick();
     if (getCurrentTimer().getTime() <= 0.0)
         shouldEndGame = true;
