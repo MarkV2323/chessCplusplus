@@ -75,5 +75,5 @@ TEST(GameTest, MoveAdvancesTurn) {
     b.reset();
 }
 
-// test Game::move for not advancing the turn, declaring checkmate,
-// accepting forfeit, pawn upgrade
+// TODO: test Game::move for not advancing the turn, declaring
+// checkmate, accepting forfeit, pawn upgrade

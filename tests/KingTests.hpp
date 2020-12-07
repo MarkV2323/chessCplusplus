@@ -166,4 +166,20 @@ TEST(KingTest, captureCoord) { // NOLINT(cert-err58-cpp)
     EXPECT_EQ(p.captureCoord(d), d);
 }
 
+// test that king can't move itself into check
+TEST(KingTest, moveSelfIntoCheck) { // NOLINT(cert-err58-cpp)
+    Board &b = Board::get();
+    King *wk = new King(WHITE, Coord(0,0));
+    King *bk = new King(BLACK, Coord(2,0));
+    b.placePiece(wk, wk->getLocation());
+    b.placePiece(bk, bk->getLocation());
+    b.setKings(wk, bk);
+    vector<Coord> moves = wk->possibleMoves();
+    EXPECT_TRUE(std::find(moves.begin(), moves.end(), Coord(1,0)) == moves.end());
+    EXPECT_TRUE(std::find(moves.begin(), moves.end(), Coord(1,1)) == moves.end());
+    EXPECT_FALSE(std::find(moves.begin(), moves.end(), Coord(0,1)) == moves.end());
+    EXPECT_EQ(moves.size(), 1);
+    b.clearBoard();
+}
+
 #endif //FINALPROJECT_KINGTESTS_HPP

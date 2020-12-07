@@ -48,7 +48,6 @@ inline void move_cursor(Board &b) {
 
 // Main Method
 int main() {
-
     // Init and build chess board.
     Board &b = Board::get();
     initNCurses();

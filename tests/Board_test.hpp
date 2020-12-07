@@ -42,7 +42,7 @@ TEST(BoardTest, HighlightedSquares) {
 TEST(BoardTest, Pieces) {
     Board &b = Board::get();
     Coord a (0,1);
-    Pawn p;
+    Pawn* p = new Pawn();
     std::vector<Coord> v;
     for (int i = 0; i < 8; ++i)
         for (int j = 0; j < 8; ++j)
@@ -54,10 +54,12 @@ TEST(BoardTest, Pieces) {
     Coord c = v.back();
     v.pop_back();
     // place a piece
-    b.placePiece(&p, c);
-    EXPECT_EQ(b.piece(c), &p);
+    b.placePiece(p, c);
+    EXPECT_EQ(b.piece(c), p);
     for (auto c: v)
         EXPECT_EQ(b.piece(c), nullptr);
+
+    b.reset();
 }
 
 TEST(BoardTest, Reset) {
@@ -113,6 +115,8 @@ TEST(BoardTest, removePiece) {
     EXPECT_EQ(b.piece(c2), nullptr);
     for (auto c: v)
         EXPECT_EQ(b.piece(c), nullptr);
+
+    b.reset();
 }
 
 TEST(BoardTest, isInCheck) {
@@ -127,6 +131,8 @@ TEST(BoardTest, isInCheck) {
     b.placePiece(wr, Coord(0,7));
     EXPECT_FALSE(b.isInCheck(WHITE));
     EXPECT_TRUE(b.isInCheck(BLACK));
+
+    b.reset();
 }
 
 TEST(BoardTest, canMakeMove) {

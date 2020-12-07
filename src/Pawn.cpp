@@ -54,7 +54,7 @@ std::vector<Coord> Pawn::possibleMoves() {
             // adds 2 y
             testLocation.add(Coord(0,2));
             // checks if valid
-            if (testLocation.isInBounds() && (board.piece(testLocation) == nullptr || board.piece(testLocation)->getTeam() != BLACK)) {
+            if (moveIsValid(testLocation)) {
                 // add valid location to possibleMoves
                 possibleMoves.push_back(testLocation);
             }
@@ -66,7 +66,7 @@ std::vector<Coord> Pawn::possibleMoves() {
             // subs 2 y
             testLocation.add(Coord(0,-2));
             // checks if valid
-            if (testLocation.isInBounds() && (board.piece(testLocation) == nullptr || board.piece(testLocation)->getTeam() != WHITE)) {
+            if (moveIsValid(testLocation)) {
                 // add valid location to possibleMoves
                 possibleMoves.push_back(testLocation);
             }
@@ -78,14 +78,14 @@ std::vector<Coord> Pawn::possibleMoves() {
     if (testTeam == BLACK) {
         // checks 1 east 1 south
         testLocation.add(Coord(1,1));
-        if (testLocation.isInBounds() && (board.piece(testLocation) != nullptr && board.piece(testLocation)->getTeam() != BLACK)) {
+        if (testLocation.isInBounds() && (board.piece(testLocation) != nullptr && moveIsValid(testLocation))) {
             possibleMoves.push_back(testLocation);
         }
         testLocation = this->getLocation();
 
         // checks 1 west 1 south
         testLocation.add(Coord(-1,1));
-        if (testLocation.isInBounds() && (board.piece(testLocation) != nullptr && board.piece(testLocation)->getTeam() != BLACK)) {
+        if (testLocation.isInBounds() && (board.piece(testLocation) != nullptr && moveIsValid(testLocation))) {
             possibleMoves.push_back(testLocation);
         }
         testLocation = this->getLocation();
@@ -93,14 +93,14 @@ std::vector<Coord> Pawn::possibleMoves() {
     if (testTeam == WHITE) {
         // checks 1 east 1 north
         testLocation.add(Coord(1,-1));
-        if (testLocation.isInBounds() && (board.piece(testLocation) != nullptr && board.piece(testLocation)->getTeam() != WHITE)) {
+        if (testLocation.isInBounds() && (board.piece(testLocation) != nullptr && moveIsValid(testLocation))) {
             possibleMoves.push_back(testLocation);
         }
         testLocation = this->getLocation();
 
         // checks 1 west 1 north
         testLocation.add(Coord(-1,-1));
-        if (testLocation.isInBounds() && (board.piece(testLocation) != nullptr && board.piece(testLocation)->getTeam() != WHITE)) {
+        if (testLocation.isInBounds() && (board.piece(testLocation) != nullptr && moveIsValid(testLocation))) {
             possibleMoves.push_back(testLocation);
         }
         testLocation = this->getLocation();
@@ -110,7 +110,7 @@ std::vector<Coord> Pawn::possibleMoves() {
     if (testTeam == BLACK) {
         // checks 1 south
         testLocation.add(Coord(0,1));
-        if (testLocation.isInBounds() && (board.piece(testLocation) == nullptr || board.piece(testLocation)->getTeam() != BLACK)) {
+        if (moveIsValid(testLocation)) {
             possibleMoves.push_back(testLocation);
         }
         testLocation = this->getLocation();
@@ -118,7 +118,7 @@ std::vector<Coord> Pawn::possibleMoves() {
     if (testTeam == WHITE) {
         // checks 1 north
         testLocation.add(Coord(0,-1));
-        if (testLocation.isInBounds() && (board.piece(testLocation) == nullptr || board.piece(testLocation)->getTeam() != WHITE)) {
+        if (moveIsValid(testLocation)) {
             possibleMoves.push_back(testLocation);
         }
         testLocation = this->getLocation();

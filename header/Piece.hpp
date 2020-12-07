@@ -27,6 +27,17 @@ private:
     enum Team team;
     Coord currentLocation;
 
+protected:
+    // Returns true if moving to DST is valid (no friendly piece
+    // there, does not put self into check, is in bounds) It does NOT
+    // check if the path to this square in unobstructed and assumes it
+    // is unobstructed.
+    bool moveIsValid(Coord dst);
+
+    // Return valid moves on a path starting at the piece and moving by
+    // INCREMENT
+    void tryMovesOnRay(std::vector<Coord> &result, Coord increment);
+
 public:
     // Constructor
     Piece() : symbol(" "), value(0), team(BLACK), currentLocation(Coord(0,0)) { }; // DEFAULTS
@@ -49,7 +60,6 @@ public:
     // there) when moving to dst. For most pieces this is simply DST
     // so the default behavior of this function is to just return dst.
     virtual Coord captureCoord(Coord dst);
-
     // Returns true if moving this piece to DST would put this piece's
     // own team in checkmate
     bool moveWouldCauseCheckmate(Coord dst);

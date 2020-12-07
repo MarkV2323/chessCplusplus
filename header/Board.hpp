@@ -17,8 +17,8 @@ private:
     Piece *board[8][8] = {{nullptr}};
     Coord cursor_ = Coord(0, 0);
     std::vector<Coord> highlightedSquares_;
-    Piece *whiteKing;
-    Piece *blackKing;
+    Piece *whiteKing = nullptr;
+    Piece *blackKing = nullptr;
 
     void drawSquare(const Coord &c, enum BorderType border);
     void drawCursor();

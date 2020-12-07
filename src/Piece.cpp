@@ -57,13 +57,32 @@ bool Piece::moveWouldCauseCheckmate(Coord dst) {
     Piece *captured = b.piece(capture);
     // simulate move
     b.placePiece(nullptr, capture);
-    b.placePiece(nullptr, this->getLocation());
+    b.placePiece(nullptr, src);
     b.placePiece(this, dst);
     bool wouldCheckmate = b.isInCheck(this->getTeam());
     // reverse move
-    b.placePiece(nullptr, this->getLocation());
+    b.placePiece(nullptr, dst);
     b.placePiece(captured, capture);
     b.placePiece(this, src);
 
     return wouldCheckmate;
+}
+
+bool Piece::moveIsValid(Coord dst) {
+    Board &b = Board::get();
+    if (dst.isInBounds()) {
+        Piece *p = b.piece(dst);
+        return ((p == nullptr) || (p->getTeam() != team)) && !this->moveWouldCauseCheckmate(dst);
+    }
+    return false;
+}
+
+void Piece::tryMovesOnRay(vector<Coord> &result, Coord increment) {
+    Board &b = Board::get();
+    Coord c = getLocation();
+    do {
+        c.add(increment);
+        if (moveIsValid(c))
+            result.push_back(c);
+    } while (c.isInBounds() && !b.piece(c));
 }
