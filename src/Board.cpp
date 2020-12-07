@@ -156,7 +156,8 @@ bool Board::isInCheck(enum Team team) {
 }
 
 bool Board::canMakeMove(enum Team team) {
-    // TODO: go through all of TEAM's pieces on the board, check if
-    // any of them return a nonempty possibleMoves
-    return true;
+    for (auto p: *this)
+        if (p && (p->getTeam() == team) && !(p->possibleMoves().empty()))
+            return true;
+    return false;
 }
