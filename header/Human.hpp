@@ -7,7 +7,7 @@
 class Human: public Player {
 public:
     Human(enum Team team): Player(team) {};
-    virtual void tick();
+    virtual void tick(Game &g);
 };
 
 #endif //__HUMAN_H__

@@ -3,6 +3,13 @@
 #include "../header/Draw.hpp"
 #include "../header/Piece.hpp"
 
+#include "../header/Pawn.hpp"
+#include "../header/Rook.hpp"
+#include "../header/Knight.hpp"
+#include "../header/Bishop.hpp"
+#include "../header/Queen.hpp"
+#include "../header/King.hpp"
+
 #include <algorithm>
 #include <array>
 #include <cassert>
@@ -55,6 +62,35 @@ void Board::clearBoard() {
             placePiece(nullptr, Coord(j, i));
         }
     }
+}
+
+void Board::placeInitialPieces() {
+    vector<Piece*> pieces = {
+        new Rook(WHITE, Coord(0, 7)),
+        new Rook(WHITE, Coord(7, 7)),
+        new Knight(WHITE, Coord(1, 7)),
+        new Knight(WHITE, Coord(6, 7)),
+        new Bishop(WHITE, Coord(2, 7)),
+        new Bishop(WHITE, Coord(5, 7)),
+        new Queen(WHITE, Coord(3, 7)),
+        new King(WHITE, Coord(4, 7)),
+
+        new Rook(BLACK, Coord(0, 0)),
+        new Rook(BLACK, Coord(7, 0)),
+        new Knight(BLACK, Coord(1, 0)),
+        new Knight(BLACK, Coord(6, 0)),
+        new Bishop(BLACK, Coord(2, 0)),
+        new Bishop(BLACK, Coord(5, 0)),
+        new Queen(BLACK, Coord(3, 0)),
+        new King(BLACK, Coord(4, 0)),
+    };
+    for (int i = 0; i < 8; ++i) {
+        pieces.push_back(new Pawn(WHITE, Coord(i, 6)));
+        pieces.push_back(new Pawn(BLACK, Coord(i, 1)));
+    }
+
+    for (auto p: pieces)
+        placePiece(p, p->getLocation());
 }
 
 void Board::moveCursor(enum Direction dir) {

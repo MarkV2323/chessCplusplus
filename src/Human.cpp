@@ -1,3 +1,3 @@
 #include "../header/Human.hpp"
 
-void Human::tick() {}
+void Human::tick(Game &g) {}

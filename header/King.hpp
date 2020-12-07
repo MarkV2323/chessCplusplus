@@ -17,7 +17,7 @@ public:
     // Non Virtual Functions
 
     // Virtual Functions from parent
-    std::vector<Coord> possibleMoves();
+    virtual std::vector<Coord> possibleMoves();
 
 };
 #endif //FINALPROJECT_KING_HPP

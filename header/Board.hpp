@@ -50,6 +50,10 @@ public:
     // Removes all pieces from the board, deleting them.
     void clearBoard();
 
+    // Sets up the board for a new game. initNCurses must have been
+    // called first.
+    void placeInitialPieces();
+
     // Moves the cursor one square, wrapping around the board if the edge is reached
     void moveCursor(enum Direction);
     // Returns the current cursor position
