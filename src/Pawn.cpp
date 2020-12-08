@@ -119,6 +119,7 @@ std::vector<Coord> Pawn::possibleMoves() {
         // checks 1 north
         testLocation.add(Coord(0,-1));
         if (moveIsValid(testLocation)) {
+            // TODO: Add another test to ensure that a piece is not in the way.
             possibleMoves.push_back(testLocation);
         }
         testLocation = this->getLocation();
