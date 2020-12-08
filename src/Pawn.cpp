@@ -111,7 +111,9 @@ std::vector<Coord> Pawn::possibleMoves() {
         // checks 1 south
         testLocation.add(Coord(0,1));
         if (moveIsValid(testLocation)) {
-            possibleMoves.push_back(testLocation);
+            if (board.piece(testLocation) == nullptr) {
+                possibleMoves.push_back(testLocation);
+            }
         }
         testLocation = this->getLocation();
     }
@@ -119,8 +121,9 @@ std::vector<Coord> Pawn::possibleMoves() {
         // checks 1 north
         testLocation.add(Coord(0,-1));
         if (moveIsValid(testLocation)) {
-            // TODO: Add another test to ensure that a piece is not in the way.
-            possibleMoves.push_back(testLocation);
+            if (board.piece(testLocation) == nullptr) {
+                possibleMoves.push_back(testLocation);
+            }
         }
         testLocation = this->getLocation();
     }
