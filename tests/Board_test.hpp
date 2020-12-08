@@ -221,3 +221,22 @@ TEST(BoardTest, canMakeMoveOutOfCheck) {
 
     b.reset();
 }
+
+TEST(BoardTest, lastPieceInBoardCheckedForCheckmate) {
+    // test making sure that isInCheck iterates all the way to the
+    // last piece
+    Board &b = Board::get();
+
+    King *wk = new King(WHITE, Coord(0,0));
+    King *bk = new King(BLACK, Coord(6,7));
+    b.placePiece(wk, wk->getLocation());
+    b.placePiece(bk, bk->getLocation());
+    b.setKings(wk, bk);
+
+    Rook *br = new Rook(WHITE, Coord(7,7));
+    b.placePiece(br, br->getLocation());
+
+    EXPECT_TRUE(b.isInCheck(BLACK));
+
+    b.reset();
+}
