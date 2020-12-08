@@ -3,10 +3,13 @@
 
 #include "global.h"
 #include "Player.hpp"
+#include "Timer.hpp"
 
 class Human: public Player {
+
 public:
-    Human(enum Team team): Player(team) {};
+    Human(enum Team team): Player(team){};
+
     virtual void tick(Game &g);
 };
 
