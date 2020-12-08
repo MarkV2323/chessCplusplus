@@ -33,7 +33,7 @@ inline void highlight_current_piece(Board &b) {
 
 // Cursor Move Function (arrow keys to move, x to exit)
 inline void move_cursor(Board &b, Game &g, enum Team team) {
-
+#ifndef NO_GRAPHICS
     switch (getch()) {
         case 'x':
             // a marked piece exists
@@ -96,7 +96,7 @@ inline void move_cursor(Board &b, Game &g, enum Team team) {
             // Nothing happens if no arrow keys are pressed.
             break;
     }
-
+#endif // NO_GRAPHICS
     // End move_cursor method
 }
 
