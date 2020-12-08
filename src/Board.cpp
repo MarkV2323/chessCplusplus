@@ -40,7 +40,7 @@ void Board::drawCursor() {
 // Iterator
 
 Board::iterator Board::begin() { return (Piece**) board; }
-Board::iterator Board::end() { return ((Piece**) board) + (8*8+1); }
+Board::iterator Board::end() { return ((Piece**) board) + (8*8); }
 
 // Board
 
@@ -65,6 +65,8 @@ void Board::clearBoard() {
 }
 
 void Board::placeInitialPieces() {
+    King *wk = new King(WHITE, Coord(4, 7));
+    King *bk = new King(BLACK, Coord(4, 0));
     vector<Piece*> pieces = {
         new Rook(WHITE, Coord(0, 7)),
         new Rook(WHITE, Coord(7, 7)),
@@ -73,7 +75,7 @@ void Board::placeInitialPieces() {
         new Bishop(WHITE, Coord(2, 7)),
         new Bishop(WHITE, Coord(5, 7)),
         new Queen(WHITE, Coord(3, 7)),
-        new King(WHITE, Coord(4, 7)),
+        wk,
 
         new Rook(BLACK, Coord(0, 0)),
         new Rook(BLACK, Coord(7, 0)),
@@ -82,7 +84,7 @@ void Board::placeInitialPieces() {
         new Bishop(BLACK, Coord(2, 0)),
         new Bishop(BLACK, Coord(5, 0)),
         new Queen(BLACK, Coord(3, 0)),
-        new King(BLACK, Coord(4, 0)),
+        bk,
     };
     for (int i = 0; i < 8; ++i) {
         pieces.push_back(new Pawn(WHITE, Coord(i, 6)));
@@ -91,6 +93,7 @@ void Board::placeInitialPieces() {
 
     for (auto p: pieces)
         placePiece(p, p->getLocation());
+    setKings(wk, bk);
 }
 
 void Board::moveCursor(enum Direction dir) {
