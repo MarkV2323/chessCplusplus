@@ -1,13 +1,10 @@
 #include "../header/Knight.hpp"
-#include "../header/Board.hpp"
 #include <vector>
 
 // returns a vector of the possible moves.
 std::vector<Coord> Knight::possibleMoves() {
     // vector to return.
     std::vector<Coord> possibleMoves;
-    Board &board = Board::get();
-    Team team = getTeam();
     Coord currentLocation = this->getLocation();
     Coord testLocation = currentLocation;
 
@@ -54,11 +51,6 @@ std::vector<Coord> Knight::possibleMoves() {
         possibleMoves.push_back(testLocation);
     }
     testLocation = currentLocation;
-
-    // returns an empty vector if no possible moves exist.
-    if (possibleMoves.empty()) {
-        return {};
-    }
 
     // returns the possibleMoves vector.
     return possibleMoves;

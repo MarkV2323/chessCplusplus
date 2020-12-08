@@ -1,24 +1,10 @@
 #include "../header/King.hpp"
-#include "../header/Board.hpp"
 #include <vector>
 #include <iostream>
 
-// // in-line function for checking basic principals of available moves
-// // (null ptr, friendly piece, out of bounds)
-// inline bool moveIsValid(Coord testCoord) {
-//     if (testCoord.isInBounds()) {
-//         Piece *p = board.piece(testCoord);
-//         return (p == nullptr) || (p->getTeam() != team);
-//     }
-//     return false;
-// }
-
 std::vector<Coord> King::possibleMoves() {
-
     // vector to return.
     std::vector<Coord> possibleMoves;
-    Board &board = Board::get();
-    Team team = getTeam();
     Coord currentLocation = this->getLocation();
     Coord testLocation = currentLocation;
 
@@ -49,12 +35,6 @@ std::vector<Coord> King::possibleMoves() {
         testLocation = currentLocation;
     }
 
-    // returns an empty vector if no possible moves exist.
-    if (possibleMoves.empty()) {
-        return {};
-    }
-
-    // returns the possibleMoves vector.
     return possibleMoves;
 
 }
