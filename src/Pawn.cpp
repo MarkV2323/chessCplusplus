@@ -10,7 +10,6 @@
  * Once a pawn chess piece reaches the other side of the chess board, the player may "trade" the pawn in
  * for any other chess piece if they choose, except another king.
  */
-class Board;
 
 // Non-virtual function from parent.
 bool Pawn::isFirstMove() {
