@@ -45,12 +45,12 @@ inline void move_cursor(Board &b, Game &g, enum Team team) {
                     // resets marking variables
                     markedPiece = false;
                     highlight_current_piece(b);
-                    drawTick();
+                    //drawTick();
                 } else {
                     // not at a valid position, will reset the marking variables.
                     markedPiece = false;
                     highlight_current_piece(b);
-                    drawTick();
+                    //drawTick();
                 }
             }
             // a marked piece does not exist.
@@ -71,25 +71,31 @@ inline void move_cursor(Board &b, Game &g, enum Team team) {
         case KEY_UP:
             b.moveCursor(UP);
             highlight_current_piece(b);
-            drawTick();
+            //drawTick();
             break;
         case KEY_LEFT:
             b.moveCursor(LEFT);
             highlight_current_piece(b);
-            drawTick();
+            //drawTick();
             break;
         case KEY_DOWN:
             b.moveCursor(DOWN);
             highlight_current_piece(b);
-            drawTick();
+            //drawTick();
             break;
         case KEY_RIGHT:
             b.moveCursor(RIGHT);
             highlight_current_piece(b);
-            drawTick();
+            //drawTick();
             break;
         case 's':
-            drawTick();
+            g.save();
+            //drawTick();
+            highlight_current_piece(b);
+            break;
+        case 'Q':
+            g.setShouldEndGame();
+            //drawTick();
             highlight_current_piece(b);
             break;
         default:
