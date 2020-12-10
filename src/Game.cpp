@@ -2,10 +2,14 @@
 #include "../header/command.hpp"
 #include "../header/Draw.hpp"
 #include "../header/Game.hpp"
+#include "../header/savestrategy.hpp"
+#include "../header/csvstrat.hpp"
+#include "../header/jsonstrat.hpp"
 
 Game::Game(Player &p1, Player &p2, int timerStart)
     : player1(p1), player2(p2), timer1(timerStart), timer2(timerStart), shouldEndGame(false) {
     currentPlayer = (player1.getTeam() == WHITE) ? 0 : 1;
+    save_strat = new JSONstrat();
 };
 
 Player& Game::getPlayer(int number) {
@@ -26,6 +30,10 @@ Timer& Game::getCurrentTimer() {
 
 enum Team Game::getCurrentTurn() {
     return getCurrentPlayer().getTeam();
+}
+
+void Game::set_save_strategy(SaveStrategy* save_strat){
+    this->save_strat = save_strat;
 }
 
 void Game::advanceTurn() {
@@ -53,15 +61,17 @@ void Game::move(Command c) {
     b.placePiece(nullptr, s); // now move p
     b.placePiece(p, d);
     // }
-
+    save_strat->moves.push_back(c);
     advanceTurn();
     if (!b.canMakeMove(getCurrentTurn())) {
-        if (b.isInCheck(getCurrentTurn()))
+        if (b.isInCheck(getCurrentTurn())){
             // Checkmate!
             shouldEndGame = true;
-        else
+        }
+        else{
             // give control back to other player
             advanceTurn();
+        }
     }
     // regardless of whos turn it now is, make sure to prepare the
     // timer
@@ -75,6 +85,7 @@ void Game::runGame() {
         // TODO: check for user input asking to save and quit
         tick();
     }
+    save_strat->write();
 }
 
 void Game::tick() {

@@ -9,10 +9,11 @@ using namespace std;
 
 class SaveStrategy {
     public:
+        vector<Command> moves;
         SaveStrategy() {};
         
         virtual void read() = 0;
-        virtual void write(vector<Command> moves) = 0;
+        virtual void write() = 0;
 };
 
 #endif

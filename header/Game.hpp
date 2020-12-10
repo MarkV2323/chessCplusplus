@@ -5,6 +5,7 @@
 #include "command.hpp"
 #include "Player.hpp"
 #include "Timer.hpp"
+#include "savestrategy.hpp"
 
 class Game {
 private:
@@ -14,6 +15,7 @@ private:
     Timer timer2;
     int currentPlayer;
     bool shouldEndGame;
+    SaveStrategy* save_strat = nullptr;
 
     Player& getCurrentPlayer();
     Timer& getCurrentTimer();
@@ -28,6 +30,7 @@ public:
     Timer& getTimer(int number);
     enum Team getCurrentTurn();
     void advanceTurn();
+    void set_save_strategy(SaveStrategy* save_strat);
 
     // Player and game loading should call this function to play a
     // move. It will update the board and check for checkmate/game end

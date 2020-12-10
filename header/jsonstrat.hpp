@@ -8,19 +8,28 @@
 
 class JSONstrat : public SaveStrategy {
     public:
-        void write(vector<Command> moves) {
+        void read(){
+            ifstream file;
+            string filename = "moves.json";
+            file.open(filename.c_str());
+            
+        
+        }
+
+        void write() {
             ofstream file;
-            file.open("moves.json");
+            string filename = "moves.json";
+            file.open(filename.c_str(), fstream::out | fstream::trunc);
             for(int i = 0; i < moves.size(); i++) {
                 if(i == 0){
                     file << "{\n";
                     file << "\t\"Moves\": [\n";
                 }
                 if(i == moves.size() - 1){
-                    file << "\t {\n\t\t\"move\": \"" << moves[i].stringify() << "\"\n }\n";
+                    file << "\t\t{\n\t\t\t\"move\": \"" << moves[i].stringify() << "\"\n\t\t}\n";
                 }
                 else{
-                    file << "\t {\n\t\t\"move\": \"" << moves[i].stringify() << "\"\n },\n";
+                    file << "\t\t{\n\t\t\t\"move\": \"" << moves[i].stringify() << "\"\n\t\t},\n";
                 }
             }
             file << "\t]\n}";
@@ -28,4 +37,4 @@ class JSONstrat : public SaveStrategy {
         }
 };
 
-#define
+#endif
