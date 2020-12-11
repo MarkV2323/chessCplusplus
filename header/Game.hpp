@@ -6,6 +6,9 @@
 #include "Player.hpp"
 #include "Timer.hpp"
 #include "savestrategy.hpp"
+#include <vector>
+
+enum ExitReason {UserQuit, WhiteVictory, BlackVictory};
 
 class Game {
 private:
@@ -16,7 +19,8 @@ private:
     int currentPlayer;
     bool shouldEndGame;
     SaveStrategy* save_strat = nullptr;
-    vector<Command> moves;
+    vector<Command> history;
+    enum ExitReason exitReason;
 
     Player& getCurrentPlayer();
     Timer& getCurrentTimer();
@@ -26,6 +30,8 @@ private:
 
 public:
     Game(Player &p1, Player &p2, int timerStart);
+    Game(Player &p1, Player &p2, int timerStart, SaveStrategy *saveStrategy);
+    ~Game();
 
     Player& getPlayer(int number);
     Timer& getTimer(int number);
@@ -33,13 +39,21 @@ public:
     void advanceTurn();
     void set_save_strategy(SaveStrategy* save_strat);
 
+    // starts save process
+    void save();
+    // Human can call this function to end the game
+    void setShouldEndGame();
+
+
     // Player and game loading should call this function to play a
     // move. It will update the board and check for checkmate/game end
     // and switch it to the other players turn (if they can still make
     // a move)
     void move(Command);
+    // play multiple commands
+    void move(vector<Command>);
     // call this just before entering the game loop that calls tick
-    void runGame();
+    enum ExitReason runGame();
 };
 
 #endif //__GAME_H__

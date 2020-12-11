@@ -6,11 +6,22 @@
 #include "../header/csvstrat.hpp"
 #include "../header/jsonstrat.hpp"
 
+#include <vector>
+
 Game::Game(Player &p1, Player &p2, int timerStart)
     : player1(p1), player2(p2), timer1(timerStart), timer2(timerStart), shouldEndGame(false) {
     currentPlayer = (player1.getTeam() == WHITE) ? 0 : 1;
     save_strat = new JSONstrat();
 };
+
+Game::Game(Player &p1, Player &p2, int timerStart, SaveStrategy *s)
+    : Game(p1, p2, timerStart) {
+    save_strat = s  ;
+}
+
+Game::~Game() {
+    //delete save_strat;
+}
 
 Player& Game::getPlayer(int number) {
     return (number == 0) ? player1 : player2;
@@ -41,16 +52,22 @@ void Game::advanceTurn() {
 }
 
 void Game::move(Command c) {
+    history.push_back(c);
+
     // TODO: check command type (forfeit vs actual move vs pawn upgrade)
     // - if forfeit, end game
     // - if pawn upgrade, do pawn upgrade but 
     // - else swap turns, check if player can make move, if not
     //   advance turn again or declare checkmate
 
-    // if forfeit, end game here and return
+    // if forfeit {
+    // exitReason = (getCurrentTurn() == WHITE) ? BlackVictory : WhiteVictory;
+    // shouldEndGame = true;
+    // return;
+    // }
 
     // if (command is pawn upgrade)
-    //     swap out pawn, (ask user which piece they want to swap in?)
+    //     swap out pawn
     // else {
     // capture and move pieces
     Board &b = Board::get();
@@ -64,35 +81,54 @@ void Game::move(Command c) {
     moves.push_back(c);
     advanceTurn();
     if (!b.canMakeMove(getCurrentTurn())) {
-        if (b.isInCheck(getCurrentTurn())){
+        if (b.isInCheck(getCurrentTurn())) {
             // Checkmate!
+            exitReason = (getCurrentTurn() == WHITE) ? BlackVictory : WhiteVictory;
             shouldEndGame = true;
         }
-        else{
+        else
             // give control back to other player
             advanceTurn();
-        }
     }
     // regardless of whos turn it now is, make sure to prepare the
     // timer
     getCurrentTimer().startTimer();
 }
 
-void Game::runGame() {
-    getCurrentTimer().startTimer();
+void Game::move(vector<Command> cs) {
+    for (auto c: cs) move(c);
+}
 
     while (!shouldEndGame) {
         // TODO: check for user input asking to save and quit
         tick();
     }
-    save_strat->write(moves);
+    save_strat->write(history);
+
+void Game::save() {
+    if (save_strat != nullptr) {
+        save_strat->write(history);
+    }
+}
+
+void Game::setShouldEndGame() {
+    exitReason = UserQuit;
+    shouldEndGame = true;
+}
+
+enum ExitReason Game::runGame() {
+    getCurrentTimer().startTimer();
+    while (!shouldEndGame) tick();
+    return exitReason;
 }
 
 void Game::tick() {
     getCurrentPlayer().tick(*this);
     getCurrentTimer().tick();
-    if (getCurrentTimer().getTime() <= 0.0)
+    if (getCurrentTimer().getTime() <= 0.0) {
+        exitReason = (getCurrentTurn() == WHITE) ? BlackVictory : WhiteVictory;
         shouldEndGame = true;
+    }
     drawGameInfoTick(*this);
     drawTick();
 }
