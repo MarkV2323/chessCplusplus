@@ -2,6 +2,9 @@
 #include "../header/command.hpp"
 #include "../header/Draw.hpp"
 #include "../header/Game.hpp"
+#include "../header/savestrategy.hpp"
+#include "../header/csvstrat.hpp"
+#include "../header/jsonstrat.hpp"
 
 #include <ctime>
 #include <sstream>
@@ -10,11 +13,12 @@
 Game::Game(Player &p1, Player &p2, int timerStart)
     : player1(p1), player2(p2), timer1(timerStart), timer2(timerStart), shouldEndGame(false) {
     currentPlayer = (player1.getTeam() == WHITE) ? 0 : 1;
-}
+    save_strat = new JSONstrat();
+};
 
 Game::Game(Player &p1, Player &p2, int timerStart, SaveStrategy *s)
     : Game(p1, p2, timerStart) {
-    save_strat = s  ;
+    save_strat = s;
 }
 
 Game::~Game() {
@@ -39,6 +43,10 @@ Timer& Game::getCurrentTimer() {
 
 enum Team Game::getCurrentTurn() {
     return getCurrentPlayer().getTeam();
+}
+
+void Game::set_save_strategy(SaveStrategy* save_strat){
+    this->save_strat = save_strat;
 }
 
 void Game::advanceTurn() {
@@ -72,7 +80,7 @@ void Game::move(Command c) {
     b.placePiece(nullptr, s); // now move p
     b.placePiece(p, d);
     // }
-
+    history.push_back(c);
     advanceTurn();
     if (!b.canMakeMove(getCurrentTurn())) {
         if (b.isInCheck(getCurrentTurn())) {
@@ -91,6 +99,12 @@ void Game::move(Command c) {
 
 void Game::move(vector<Command> cs) {
     for (auto c: cs) move(c);
+
+    while (!shouldEndGame) {
+        // TODO: check for user input asking to save and quit
+        tick();
+    }
+    save_strat->write(history);
 }
 
 void Game::save() {
