@@ -201,6 +201,15 @@ arrow keys | Move the red cursor.
 `s` | Save the current game.
 `Q` | Exit the game.
 
+Controls when promoting pawn:
+
+Key | Upgrades to:
+:-: | :-
+`q` | Queen
+`r` | Rook
+`k` | Knight
+`b` | Bishop
+
 ## Testing
 
 The code is tested and validated using the googletest framework and a
