@@ -15,6 +15,7 @@ int main(int argc, char **argv) {
     srand(time(0));
     int userInput;
     int userInput2;
+    int loadFile = 0;
     int timePerSide;    
     Player* player1;
     Player* player2;
@@ -48,7 +49,12 @@ int main(int argc, char **argv) {
         }
     }
     else if(userInput == 2) {
-        //loading file 
+        cout << "Load file from: [1] - CSV [2] - JSON" << endl;
+        do{
+            cout << "Input: ";
+            cin >> loadFile;
+        }while(loadFile != 1 && loadFile != 2);
+        
     }
     else
         return 0;
