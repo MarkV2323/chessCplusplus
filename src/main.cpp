@@ -37,7 +37,7 @@ int main(int argc, char **argv) {
         
         if(userInput2 == 1) {
             player1 = new Human(WHITE);
-            player2 = new Human(BLACK);    
+            player2 = new Human(BLACK);
         }
         else if(userInput2 == 2) {
             player1 = new Human(WHITE);
@@ -54,7 +54,25 @@ int main(int argc, char **argv) {
             cout << "Input: ";
             cin >> loadFile;
         }while(loadFile != 1 && loadFile != 2);
+
+        cout << "[1] - Player VS Player [2] - Player VS AI [3] - AI VS AI" << endl;
+        do{
+            cout << "Input: ";
+            cin >> userInput2;
+        }while(userInput2 != 1 && userInput2 != 2 && userInput2 != 3);
         
+        if(userInput2 == 1) {
+            player1 = new Human(WHITE);
+            player2 = new Human(BLACK);
+        }
+        else if(userInput2 == 2) {
+            player1 = new Human(WHITE);
+            player2 = new Idiot(BLACK, 2);
+        }
+        else{
+            player1 = new Idiot(WHITE, 1);
+            player2 = new Idiot(BLACK, 1);
+        }
     }
     else
         return 0;
@@ -63,28 +81,23 @@ int main(int argc, char **argv) {
     cout << "Total time per side(seconds): ";
     cin >> timePerSide;
 
-    Game g (*player1, *player2, timePerSide);
+    SaveStrategy *s = nullptr;
+    if (loadFile != 0) {
+        switch (loadFile) {
+        case 1: s = new CSVstrat(); break;
+        case 2: s = new JSONstrat(); break;
+        default: cout << "Invalid file type" << endl; return 1;
+        }
+    }
+    Game g (*player1, *player2, timePerSide, s);
     Board &b = Board::get();
     initNCurses();
     b.placeInitialPieces();
 
-    if (argc > 1) {
-        // // read first argument as filename
-        // char *name = argv[1];
-        // size_t len = strlen(name);
-
-        // SaveStrategy *s;
-        // if (strncmp("csv", name+len-4, 3))
-        //     s = new CSVstrat();
-        // else if (strncmp("json", name+len-4, 3)) {
-        //     std::cout << "JSON not supported yet" << std::endl;
-        //     return 1;
-        //     // s = new JSONstrat;
-        // }
-
-        // s->read(/*name*/);
-        // g.move(s->moves);
-        // g.set_save_strategy(s);
+    if (s) {
+        vector<Command> cs;
+        s->read(cs);
+        g.move(cs);
     }
 
     enum ExitReason exit_status = g.runGame();
