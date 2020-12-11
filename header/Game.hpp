@@ -6,7 +6,6 @@
 #include "Player.hpp"
 #include "Timer.hpp"
 #include "savestrategy.hpp"
-
 #include <vector>
 
 enum ExitReason {UserQuit, WhiteVictory, BlackVictory};
@@ -38,6 +37,7 @@ public:
     Timer& getTimer(int number);
     enum Team getCurrentTurn();
     void advanceTurn();
+    void set_save_strategy(SaveStrategy* save_strat);
 
     // starts save process
     void save();

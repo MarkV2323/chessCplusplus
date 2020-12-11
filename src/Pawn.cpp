@@ -53,7 +53,7 @@ std::vector<Coord> Pawn::possibleMoves() {
             // adds 2 y
             testLocation.add(Coord(0,2));
             // checks if valid
-            if (moveIsValid(testLocation)) {
+            if (moveIsValid(testLocation) && !board.piece(testLocation)) {
                 // add valid location to possibleMoves
                 possibleMoves.push_back(testLocation);
             }
@@ -65,7 +65,7 @@ std::vector<Coord> Pawn::possibleMoves() {
             // subs 2 y
             testLocation.add(Coord(0,-2));
             // checks if valid
-            if (moveIsValid(testLocation)) {
+            if (moveIsValid(testLocation) && !board.piece(testLocation)) {
                 // add valid location to possibleMoves
                 possibleMoves.push_back(testLocation);
             }

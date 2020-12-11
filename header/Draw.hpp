@@ -4,8 +4,11 @@
 #include "Coord.hpp"
 #include "Game.hpp"
 #include "Piece.hpp"
+#include <string>
 
 enum BorderType { NONE, CURSOR, HIGHLIGHTED };
+
+extern void drawMessage(string);
 
 extern void eraseBorder(const Coord &c);
 extern void drawSquare(Piece *p, const Coord &c, enum BorderType border);

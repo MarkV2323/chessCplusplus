@@ -12,6 +12,7 @@
 #include "Game_test.hpp"
 #include "Human_test.hpp"
 #include "PawnUpgradeCommandTest.hpp"
+#include "SaveTests.hpp"
 
 // keep this one included last since it pauses the test for over a
 // second to see that timer is functioning properly
