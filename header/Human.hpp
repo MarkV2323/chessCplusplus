@@ -11,6 +11,7 @@ public:
     Human(enum Team team): Player(team){};
 
     virtual void tick(Game &g);
+    virtual void upgradePawn(Game&, Coord pawnCoord);
 };
 
 #endif //__HUMAN_H__

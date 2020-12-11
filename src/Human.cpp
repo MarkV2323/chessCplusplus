@@ -106,6 +106,10 @@ inline void move_cursor(Board &b, Game &g, enum Team team) {
     // End move_cursor method
 }
 
+void Human::upgradePawn(Game &g, Coord pawnCoord) {
+
+}
+
 /*
  * Need to implement the human function to work as follows:
  *  they should have a tick function that checks for user input but does not wait for user input,

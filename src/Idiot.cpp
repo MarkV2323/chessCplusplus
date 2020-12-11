@@ -5,6 +5,8 @@
 
 #include <cstdlib>
 
+void Idiot::upgradePawn(Game &g, Coord pawnCoord) {}
+
 void Idiot::tick(Game &g) {
     if (!isMoving) {
         isMoving = true;

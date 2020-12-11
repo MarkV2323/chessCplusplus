@@ -3,6 +3,8 @@
 
 #include "global.h"
 
+#include "Coord.hpp"
+
 class Game;
 
 class Player {
@@ -12,6 +14,7 @@ public:
     Player(enum Team team): team(team) {};
     enum Team getTeam() { return team; };
     virtual void tick(Game &g) = 0;
+    virtual void upgradePawn(Game&, Coord pawnCoord) = 0;
 };
 
 #endif //__PLAYER_H__
