@@ -11,8 +11,8 @@ class SaveStrategy {
     public:
         SaveStrategy() {};
         
-        virtual void read() = 0;
-        virtual void write(vector<Command> moves) = 0;
+        virtual void read(vector<Command> &moves) = 0;
+        virtual void write(vector<Command> &moves) = 0;
 };
 
 #endif

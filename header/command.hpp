@@ -15,6 +15,7 @@ class Command {
     Command(Coord s, Coord d): source(s), destination(d) {};
 
         string stringify(){
+            char num = '0';
             char sourcexchar = 'a';
             char destxchar = 'a';
             string output;
@@ -27,7 +28,10 @@ class Command {
                 destxchar++;
             }
 
-            output = sourcexchar + static_cast<char>(source.y) + destxchar + static_cast<char>(destination.y);
+            output.push_back(sourcexchar);
+            output.push_back(num + source.y);
+            output.push_back(destxchar);
+            output.push_back(num + destination.y);
 
             return output;
         }
