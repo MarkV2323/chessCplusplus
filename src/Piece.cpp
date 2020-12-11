@@ -86,3 +86,10 @@ void Piece::tryMovesOnRay(vector<Coord> &result, Coord increment) {
             result.push_back(c);
     } while (c.isInBounds() && !b.piece(c));
 }
+
+bool Piece::isPawn() { return false; }
+
+bool Piece::reachedEndOfBoard() {
+    int y = (getTeam() == WHITE) ? 0 : 7;
+    return getLocation().y == y;
+}

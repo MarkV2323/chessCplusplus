@@ -5,8 +5,12 @@
 #include "Player.hpp"
 #include "Timer.hpp"
 
-class Human: public Player {
+class Board;
+class Game;
 
+class Human: public Player {
+private:
+    void move_cursor(Board &b, Game &g, enum Team team);
 public:
     Human(enum Team team): Player(team){};
 

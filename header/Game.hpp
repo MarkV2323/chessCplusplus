@@ -49,7 +49,7 @@ public:
     // move. It will update the board and check for checkmate/game end
     // and switch it to the other players turn (if they can still make
     // a move)
-    void move(Command);
+    void move(Command&);
     // play multiple commands
     void move(vector<Command>);
     // call this just before entering the game loop that calls tick

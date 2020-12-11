@@ -7,8 +7,6 @@
 #include "Coord.hpp"
 #include <iostream>
 
-using namespace std;
-
 enum UpgradePiece {QUEEN, ROOK, KNIGHT, BISHOP};
 
 class PawnUpgradeCommand : public Command {
@@ -23,4 +21,3 @@ class PawnUpgradeCommand : public Command {
 };
 
 #endif
-

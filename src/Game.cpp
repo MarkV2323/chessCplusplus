@@ -43,20 +43,8 @@ void Game::advanceTurn() {
     currentPlayer = (currentPlayer + 1) % 2;
 }
 
-void Game::move(Command c) {
+void Game::move(Command &c) {
     history.push_back(c);
-
-    // TODO: check command type (forfeit vs actual move vs pawn upgrade)
-    // - if forfeit, end game
-    // - if pawn upgrade, do pawn upgrade but 
-    // - else swap turns, check if player can make move, if not
-    //   advance turn again or declare checkmate
-
-    // if forfeit {
-    // exitReason = (getCurrentTurn() == WHITE) ? BlackVictory : WhiteVictory;
-    // shouldEndGame = true;
-    // return;
-    // }
 
     if (c.execute())
         advanceTurn();
