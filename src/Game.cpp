@@ -13,7 +13,6 @@
 Game::Game(Player &p1, Player &p2, int timerStart)
     : player1(p1), player2(p2), timer1(timerStart), timer2(timerStart), shouldEndGame(false) {
     currentPlayer = (player1.getTeam() == WHITE) ? 0 : 1;
-    save_strat = new JSONstrat();
 };
 
 Game::Game(Player &p1, Player &p2, int timerStart, SaveStrategy *s)
