@@ -118,7 +118,8 @@ want to view specific locations that a piece can move.
 >     TA
 
 ## Class Diagram 
- ![SampleText](https://user-images.githubusercontent.com/41304553/99178322-cecf3c00-26c6-11eb-90b4-4e5f233b0e2a.png)
+
+![SampleText](https://user-images.githubusercontent.com/41304553/99178322-cecf3c00-26c6-11eb-90b4-4e5f233b0e2a.png)
 
 Patterns Used:
 
@@ -174,14 +175,46 @@ have turn timers for the players, and a object to store coordinates.
 
 ## Screenshots
 
-> Screenshots of the input/output after running your application
+![screenshot of chess game](./screenshot-game.png)
 
 ## Installation/Usage
 
-> Instructions on installing and running your application
+Requires NCurses (already on virtually any linux or macOS).
+
+Installation:
+
+```
+cmake .
+make chess
+```
+
+Usage:
+
+`./chess`
+
+Controls in game:
+
+Key | Action
+:-: | :-
+arrow keys | Move the red cursor.
+`x` | Select the piece under the cursor, or when a piece is selected, selects the square to move it to.
+`s` | Save the current game.
+`Q` | Exit the game.
 
 ## Testing
 
-> How was your project tested/validated? If you used CI, you should
-> have a "build passing" badge in this README.
- 
+The code is tested and validated using the googletest framework and a
+small set of "visual tests" for inspecting the NCurses output of
+graphical functions.
+
+To build all tests, just run `make all`. The various tests are:
+
+Name | Function
+:-: | :--
+`test` | Almost 90 unit tests
+`visual_test` | Tests all the combinations of ways the visual state of the chessboard can change
+`timer_visual_test` | Tests that the text information displayed to the right of the chessboard is updated and erased properly
+`pawn_visual_test` | integration test of visuals and pieces
+`human_visual_tester` | Simple test of controls
+
+
