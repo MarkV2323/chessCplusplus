@@ -52,8 +52,6 @@ void Game::advanceTurn() {
 }
 
 void Game::move(Command c) {
-    history.push_back(c);
-
     // TODO: check command type (forfeit vs actual move vs pawn upgrade)
     // - if forfeit, end game
     // - if pawn upgrade, do pawn upgrade but 
