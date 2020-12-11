@@ -1,6 +1,9 @@
 #include "../header/Human.hpp"
 #include "../header/Board.hpp"
+#include "../header/PawnUpgradeCommand.hpp"
+#include "../header/command.hpp"
 #include "../header/Game.hpp"
+#include "../header/Draw.hpp"
 
 #include <algorithm>
 #include <curses.h>
@@ -13,7 +16,7 @@ Coord markedLocation(-1,-1); // null value for markedLocation is (-1,-1)
 vector<Coord> markedPositions;
 
 // Highlight PossibleMove at current piece Function
-inline void highlight_current_piece(Board &b) {
+void highlight_current_piece(Board &b) {
     // gets current coords, checks if a piece is at these coords.
     if (b.piece(b.cursor()) != nullptr && !markedPiece) {
         if (b.piece(b.cursor())->possibleMoves().empty()) {
@@ -32,7 +35,7 @@ inline void highlight_current_piece(Board &b) {
 }
 
 // Cursor Move Function (arrow keys to move, x to exit)
-inline void move_cursor(Board &b, Game &g, enum Team team) {
+void Human::move_cursor(Board &b, Game &g, enum Team team) {
 #ifndef NO_GRAPHICS
     switch (getch()) {
         case 'x':
@@ -41,7 +44,12 @@ inline void move_cursor(Board &b, Game &g, enum Team team) {
                 // checks if the cursor is currently at a valid move.
                 if (std::find(markedPositions.begin(), markedPositions.end(), b.cursor()) != markedPositions.end()) {
                     // performs move
-                    g.move(Command(markedLocation, b.cursor()));
+                    Piece *p = b.piece(markedLocation);
+                    Command c (markedLocation, b.cursor());
+                    g.move(c);
+                    if (p->isPawn() && p->reachedEndOfBoard())
+                        upgradePawn(g, p->getLocation());
+
                     // resets marking variables
                     markedPiece = false;
                     highlight_current_piece(b);
@@ -104,6 +112,28 @@ inline void move_cursor(Board &b, Game &g, enum Team team) {
     }
 #endif // NO_GRAPHICS
     // End move_cursor method
+}
+
+void Human::upgradePawn(Game &g, Coord pawnCoord) {
+    char c;
+    drawMessage("Press a key\nto upgrade pawn");
+    drawGameInfoTick(g);
+    drawTick();
+#ifndef NO_GRAPHICS
+    do
+        c = getch();
+    while ((c != 'q') && (c != 'r') && (c != 'k') && (c != 'b'));
+#endif // NO_GRAPHICS
+    enum UpgradePiece p;
+    switch (c) {
+    case 'q': p = QUEEN; break;
+    case 'r': p = ROOK; break;
+    case 'k': p = KNIGHT; break;
+    case 'b': p = BISHOP; break;
+    }
+    PawnUpgradeCommand co (pawnCoord, p, getTeam());
+    g.move(co);
+    drawMessage("");
 }
 
 /*

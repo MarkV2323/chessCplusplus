@@ -2,19 +2,19 @@
 #define __COMMAND_HPP__
 
 #include "Coord.hpp"
-#include <iostream>
+#include <string>
 
 using namespace std;
 
 class Command {
-    private:
+    protected:
         Coord source;
         Coord destination;
 
     public:
     Command(Coord s, Coord d): source(s), destination(d) {};
 
-        string stringify(){
+        virtual string stringify(){
             char num = '0';
             char sourcexchar = 'a';
             char destxchar = 'a';
@@ -38,6 +38,8 @@ class Command {
 
     Coord getSource() { return source; };
     Coord getDestination() { return destination; };
+
+    virtual bool execute();
 };
 
 #endif

@@ -53,33 +53,13 @@ void Game::advanceTurn() {
     currentPlayer = (currentPlayer + 1) % 2;
 }
 
-void Game::move(Command c) {
-    // TODO: check command type (forfeit vs actual move vs pawn upgrade)
-    // - if forfeit, end game
-    // - if pawn upgrade, do pawn upgrade but 
-    // - else swap turns, check if player can make move, if not
-    //   advance turn again or declare checkmate
-
-    // if forfeit {
-    // exitReason = (getCurrentTurn() == WHITE) ? BlackVictory : WhiteVictory;
-    // shouldEndGame = true;
-    // return;
-    // }
-
-    // if (command is pawn upgrade)
-    //     swap out pawn
-    // else {
-    // capture and move pieces
-    Board &b = Board::get();
-    Coord s = c.getSource();
-    Coord d = c.getDestination();
-    Piece *p = b.piece(s);
-    b.maybeRemovePiece(p->captureCoord(d)); // remove appropriate enemy pieces from the board
-    b.placePiece(nullptr, s); // now move p
-    b.placePiece(p, d);
-    // }
+void Game::move(Command &c) {
     history.push_back(c);
-    advanceTurn();
+
+    if (c.execute())
+        advanceTurn();
+
+    Board &b = Board::get();
     if (!b.canMakeMove(getCurrentTurn())) {
         if (b.isInCheck(getCurrentTurn())) {
             // Checkmate!

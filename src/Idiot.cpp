@@ -2,8 +2,15 @@
 
 #include "../header/Board.hpp"
 #include "../header/Game.hpp"
+#include "../header/PawnUpgradeCommand.hpp"
+#include "../header/command.hpp"
 
 #include <cstdlib>
+
+void Idiot::upgradePawn(Game &g, Coord pawnCoord) {
+    PawnUpgradeCommand c (pawnCoord, QUEEN, getTeam());
+    g.move(c);
+}
 
 void Idiot::tick(Game &g) {
     if (!isMoving) {
@@ -23,7 +30,10 @@ void Idiot::tick(Game &g) {
                     if (p && (p->getTeam() == this->getTeam())) {
                         vector<Coord> moves = p->possibleMoves();
                         if (!moves.empty()) {
-                            g.move(Command(p->getLocation(), moves[rand() % moves.size()]));
+                            Command c (p->getLocation(), moves[rand() % moves.size()]);
+                            g.move(c);
+                            if (p->isPawn() && p->reachedEndOfBoard())
+                                upgradePawn(g, p->getLocation());
                             return;
                         }
                     }

@@ -18,6 +18,7 @@ public:
         thinkingTime(thinkingTimeSeconds),
         isMoving(false) {};
     virtual void tick(Game &g);
+    virtual void upgradePawn(Game&, Coord pawnCoord);
 };
 
 #endif //__IDIOT_H__

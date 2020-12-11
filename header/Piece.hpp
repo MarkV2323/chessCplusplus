@@ -63,6 +63,11 @@ public:
     // Returns true if moving this piece to DST would put this piece's
     // own team in checkmate
     bool moveWouldCauseCheckmate(Coord dst);
+    virtual bool isPawn();
+
+    // returns true if the piece reached the enemies's side of the
+    // board.
+    bool reachedEndOfBoard();
 };
 
 

@@ -23,6 +23,7 @@ public:
     std::vector<Coord> possibleMoves();
 
     Coord captureCoord(Coord dst);
+    bool isPawn();
 };
 
 

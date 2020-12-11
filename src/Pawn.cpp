@@ -142,3 +142,5 @@ Coord Pawn::captureCoord(Coord dst) {
     // normally
     return Piece::captureCoord(dst);
 }
+
+bool Pawn::isPawn() { return true; }
