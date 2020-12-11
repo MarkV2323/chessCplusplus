@@ -78,7 +78,7 @@ void Game::move(Command c) {
     b.placePiece(nullptr, s); // now move p
     b.placePiece(p, d);
     // }
-    moves.push_back(c);
+    history.push_back(c);
     advanceTurn();
     if (!b.canMakeMove(getCurrentTurn())) {
         if (b.isInCheck(getCurrentTurn())) {
