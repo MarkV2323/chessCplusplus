@@ -22,17 +22,16 @@ class JSONstrat : public SaveStrategy {
             file.open(filename.c_str(), fstream::out | fstream::trunc);
             for(int i = 0; i < moves.size(); i++) {
                 if(i == 0){
-                    file << "{\n";
-                    file << "\t\"Moves\": [\n";
+                    file << "[\n";
                 }
                 if(i == moves.size() - 1){
-                    file << "\t\t{\n\t\t\t\"move\": \"" << moves[i].stringify() << "\"\n\t\t}\n";
+                    file <<"\"" << moves[i].stringify() << "\"\n";
                 }
                 else{
-                    file << "\t\t{\n\t\t\t\"move\": \"" << moves[i].stringify() << "\"\n\t\t},\n";
+                    file << "\"" << moves[i].stringify() << "\",\n";
                 }
             }
-            file << "\t]\n}";
+            file << "]";
             file.close();
         }
 };
