@@ -6,6 +6,8 @@
 #include "../header/csvstrat.hpp"
 #include "../header/jsonstrat.hpp"
 
+#include <ctime>
+#include <sstream>
 #include <vector>
 
 Game::Game(Player &p1, Player &p2, int timerStart)
@@ -106,7 +108,16 @@ void Game::move(vector<Command> cs) {
 void Game::save() {
     if (save_strat != nullptr) {
         save_strat->write(history);
+
+        time_t rawTime;
+        time(&rawTime);
+        tm *time = localtime(&rawTime);
+        stringstream ss;
+        ss << "Saved " << time->tm_min << ":" << time->tm_sec;
+        drawMessage(ss.str());
     }
+    else
+        drawMessage("No save file specified");
 }
 
 void Game::setShouldEndGame() {

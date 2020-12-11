@@ -5,6 +5,7 @@
 
 #include <assert.h>
 #include <curses.h>
+#include <string>
 
 static bool isBlackSquare(const Coord &c) {
     return ((c.y + c.x) % 2) == 0;
@@ -23,7 +24,7 @@ static WINDOW* gameinfo = nullptr;
 // some parts of the info window never need to be redraw, so draw them
 // here once
 static void initializeGameInfo() {
-    gameinfo = newwin(6, 18, 0, NUM_SQUARES*SQUAREW);
+    gameinfo = newwin(7, 22, 0, NUM_SQUARES*SQUAREW + 1);
     // this text never needs to be redraw, so draw it once in initialization
     mvwaddstr(gameinfo, 0, 0, "White timer:\n\nBlack timer:\n\nIt is      's turn\n");
 }
@@ -52,10 +53,17 @@ static void refreshAllSquares() {
 
 #endif // NO_GRAPHICS
 
+void drawMessage(string m) {
+#ifndef NO_GRAPHICS
+    //mvwprintw(gameinfo, 6, 0, "                  ");
+    mvwprintw(gameinfo, 6, 0, "%-22s", m.c_str());
+#endif // NO_GRAPHICS
+}
+
 void eraseBorder(const Coord &c) {
 #ifndef NO_GRAPHICS
     wborder(getSquare(c), ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ');
-#endif
+#endif // NO_GRAPHICS
 }
 
 #ifndef NO_GRAPHICS
