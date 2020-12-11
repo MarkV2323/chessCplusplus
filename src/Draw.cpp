@@ -24,7 +24,7 @@ static WINDOW* gameinfo = nullptr;
 // some parts of the info window never need to be redraw, so draw them
 // here once
 static void initializeGameInfo() {
-    gameinfo = newwin(7, 22, 0, NUM_SQUARES*SQUAREW + 1);
+    gameinfo = newwin(8, 22, 0, NUM_SQUARES*SQUAREW + 1);
     // this text never needs to be redraw, so draw it once in initialization
     mvwaddstr(gameinfo, 0, 0, "White timer:\n\nBlack timer:\n\nIt is      's turn\n");
 }
@@ -55,8 +55,8 @@ static void refreshAllSquares() {
 
 void drawMessage(string m) {
 #ifndef NO_GRAPHICS
-    //mvwprintw(gameinfo, 6, 0, "                  ");
-    mvwprintw(gameinfo, 6, 0, "%-22s", m.c_str());
+    mvwprintw(gameinfo, 6, 0, "                     \n                     ");
+    mvwprintw(gameinfo, 6, 0, "%s", m.c_str());
 #endif // NO_GRAPHICS
 }
 

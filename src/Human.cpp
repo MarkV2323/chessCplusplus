@@ -116,6 +116,9 @@ void Human::move_cursor(Board &b, Game &g, enum Team team) {
 
 void Human::upgradePawn(Game &g, Coord pawnCoord) {
     char c;
+    drawMessage("Press a key\nto upgrade pawn");
+    drawGameInfoTick(g);
+    drawTick();
 #ifndef NO_GRAPHICS
     do
         c = getch();
@@ -130,6 +133,7 @@ void Human::upgradePawn(Game &g, Coord pawnCoord) {
     }
     PawnUpgradeCommand co (pawnCoord, p, getTeam());
     g.move(co);
+    drawMessage("");
 }
 
 /*
