@@ -16,7 +16,7 @@ Game::Game(Player &p1, Player &p2, int timerStart)
 
 Game::Game(Player &p1, Player &p2, int timerStart, SaveStrategy *s)
     : Game(p1, p2, timerStart) {
-    save_strat = s  ;
+    save_strat = s;
 }
 
 Game::~Game() {
@@ -97,13 +97,13 @@ void Game::move(Command c) {
 
 void Game::move(vector<Command> cs) {
     for (auto c: cs) move(c);
-}
 
     while (!shouldEndGame) {
         // TODO: check for user input asking to save and quit
         tick();
     }
     save_strat->write(history);
+}
 
 void Game::save() {
     if (save_strat != nullptr) {
