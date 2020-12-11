@@ -16,6 +16,7 @@ private:
     int currentPlayer;
     bool shouldEndGame;
     SaveStrategy* save_strat = nullptr;
+    vector<Command> moves;
 
     Player& getCurrentPlayer();
     Timer& getCurrentTimer();

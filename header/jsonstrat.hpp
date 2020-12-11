@@ -8,7 +8,7 @@
 
 class JSONstrat : public SaveStrategy {
     public:
-        void read(){
+        void read(vector<Command> &moves){
             ifstream file;
             string filename = "moves.json";
             file.open(filename.c_str());
@@ -16,7 +16,7 @@ class JSONstrat : public SaveStrategy {
         
         }
 
-        void write() {
+        void write(vector<Command> &moves) {
             ofstream file;
             string filename = "moves.json";
             file.open(filename.c_str(), fstream::out | fstream::trunc);

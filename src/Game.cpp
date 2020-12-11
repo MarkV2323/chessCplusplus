@@ -61,7 +61,7 @@ void Game::move(Command c) {
     b.placePiece(nullptr, s); // now move p
     b.placePiece(p, d);
     // }
-    save_strat->moves.push_back(c);
+    moves.push_back(c);
     advanceTurn();
     if (!b.canMakeMove(getCurrentTurn())) {
         if (b.isInCheck(getCurrentTurn())){
@@ -85,7 +85,7 @@ void Game::runGame() {
         // TODO: check for user input asking to save and quit
         tick();
     }
-    save_strat->write();
+    save_strat->write(moves);
 }
 
 void Game::tick() {

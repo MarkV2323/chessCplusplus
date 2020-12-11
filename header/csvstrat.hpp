@@ -12,7 +12,7 @@ using namespace std;
 
 class CSVstrat : public SaveStrategy {
     public:
-        void read(){
+        void read(vector<Command> &moves){
             string input;
             ifstream infile;
             moves.clear();
@@ -41,11 +41,12 @@ class CSVstrat : public SaveStrategy {
                 Command infromfile(sourcecoord, destcoord);
                 moves.push_back(infromfile);
             }
+            moves.pop_back();
 
             infile.close();
         }
 
-        void write() {
+        void write(vector<Command> &moves) {
             fstream file;
             string filename = "moves.csv";
             file.open(filename.c_str(), fstream::out | fstream::trunc);
