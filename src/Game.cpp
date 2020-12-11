@@ -95,8 +95,7 @@ void Game::move(vector<Command> cs) {
 
 void Game::save() {
     if (save_strat != nullptr) {
-        // save_strat->moves = history;
-        // save_strat->write();
+        save_strat->write(history);
 
         time_t rawTime;
         time(&rawTime);
